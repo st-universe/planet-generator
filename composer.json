@@ -1,0 +1,38 @@
+{
+  "name": "usox/stu3-planet-generator",
+  "autoload": {
+    "psr-4": {
+      "Stu\\PlanetGenerator\\": "src/PlanetGenerator"
+    }
+  },
+  "require": {
+    "php": "^7.3"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^7.3",
+    "mockery/mockery": "^1.1",
+    "usox/stu3-assets": "dev-master",
+    "mnsami/composer-custom-directory-installer": "1.1.*"
+  },
+  "config": {
+    "platform": {
+      "php": "7.3"
+    }
+  },
+  "scripts": {
+    "tests": "@php vendor/bin/phpunit tests"
+  },
+  "extra": {
+    "installer-paths": {
+      "./example/assets": [
+        "usox/stu3-assets"
+      ]
+    }
+  },
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "git@github.com:usox/stu3-assets.git"
+    }
+  ]
+}
