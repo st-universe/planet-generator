@@ -1,5 +1,5 @@
 {
-  "name": "usox/stu3-planet-generator",
+  "name": "stu-universe/planet-generator",
   "autoload": {
     "psr-4": {
       "Stu\\PlanetGenerator\\": "src/PlanetGenerator"
