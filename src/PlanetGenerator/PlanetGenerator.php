@@ -172,8 +172,9 @@ final class PlanetGenerator implements PlanetGeneratorInterface
         return $bphase;
     }
 
-    private function getWeightingList($colfields, $mode, $from, $to, $adjacent, $no_adjacent, $noadjacentlimit = 0)
+    private function getWeightingList($colfields, $mode, $from, $to, $adjacent, $no_adjacent, $noadjacentlimit = 0): ?array
     {
+        $res = null;
 
         $w = $colfields[self::COLGEN_W]; //count($colfields);
         $h = count($colfields[0]);
@@ -380,10 +381,16 @@ final class PlanetGenerator implements PlanetGeneratorInterface
             }
         } else {
             for ($i = 0; $i < $phase[$p][self::COLGEN_NUM]; $i++) {
-                $arr = $this->getWeightingList($colfields, $phase[$p][self::COLGEN_MODE], $phase[$p][self::COLGEN_FROM],
-                    $phase[$p][self::COLGEN_TO], $phase[$p][self::COLGEN_ADJACENT], $phase[$p][self::COLGEN_NOADJACENT],
-                    $phase[$p][self::COLGEN_NOADJACENTLIMIT]);
-                if (count($arr) == 0) {
+                $arr = $this->getWeightingList(
+                    $colfields,
+                    $phase[$p][self::COLGEN_MODE],
+                    $phase[$p][self::COLGEN_FROM],
+                    $phase[$p][self::COLGEN_TO],
+                    $phase[$p][self::COLGEN_ADJACENT],
+                    $phase[$p][self::COLGEN_NOADJACENT],
+                    $phase[$p][self::COLGEN_NOADJACENTLIMIT]
+                );
+                if ($arr === null || count($arr) == 0) {
                     break;
                 }
 

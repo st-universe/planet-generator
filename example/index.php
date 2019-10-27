@@ -11,11 +11,11 @@ $planetGenerator = new PlanetGenerator();
 $sep = 10;
 // $sep = 7; // moons
 
-$fields = $planetGenerator->generateColony($planetTypeId);
+$fields = $planetGenerator->generateColony($planetTypeId, 2);
 
 foreach ($fields as $key => $field) {
     echo sprintf(
-        '<img src="assets/fields/%d.gif" />',
+        '<img src="assets/generated/fields/%d.png" />',
         $field
     );
     if (($key + 1) % $sep === 0) {
