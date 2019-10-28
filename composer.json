@@ -11,7 +11,7 @@
   "require-dev": {
     "phpunit/phpunit": "^7.3",
     "mockery/mockery": "^1.1",
-    "usox/stu3-assets": "dev-master",
+    "st-universe/assets": "dev-master",
     "mnsami/composer-custom-directory-installer": "1.1.*"
   },
   "config": {
@@ -25,14 +25,14 @@
   "extra": {
     "installer-paths": {
       "./example/assets": [
-        "usox/stu3-assets"
+        "st-universe/assets"
       ]
     }
   },
   "repositories": [
     {
       "type": "vcs",
-      "url": "git@github.com:usox/stu3-assets.git"
+      "url": "git@github.com:st-universe/assets.git"
     }
   ]
 }
