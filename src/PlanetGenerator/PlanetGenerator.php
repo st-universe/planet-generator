@@ -177,7 +177,7 @@ final class PlanetGenerator implements PlanetGeneratorInterface
         $res = null;
 
         $w = $colfields[self::COLGEN_W]; //count($colfields);
-        $h = count($colfields[0]);
+        $h = count($colfields[0] ?? []);
         $c = 0;
         for ($i = 0; $i < $h; $i++) {
             for ($j = 0; $j < $w; $j++) {
