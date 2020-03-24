@@ -28,10 +28,10 @@ $uphases = 0;
 // config
 
 $land = rand(27, 32);
-$berge = rand(5, 6);
+$berge = rand(6, 6);
 $korall = rand(4, 6);
 $seicht = rand(9, 13);
-$trees = rand(10, 13);
+$trees = rand(9, 13);
 
 
 $ufels = rand(4, 7);
