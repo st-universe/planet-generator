@@ -120,6 +120,7 @@ final class PlanetGenerator implements PlanetGeneratorInterface
             $res = $this->shadd($res, 703, "12");
             $res = $this->shadd($res, 704, "12");
             $res = $this->shadd($res, 705, "12");
+            $res = $this->shadd($res, 706, "12");
         }
         if (($btype == self::BONUS_DEUTERIUM) || ($btype == self::BONUS_ANYRESOURCE)) {
             $res = $this->shadd($res, 201, "11");
@@ -138,6 +139,7 @@ final class PlanetGenerator implements PlanetGeneratorInterface
             $res = $this->shadd($res, 703, "21");
             $res = $this->shadd($res, 704, "21");
             $res = $this->shadd($res, 705, "21");
+            $res = $this->shadd($res, 706, "21");
 
             // trit
             $res = $this->shadd($res, 701, "22");
@@ -145,6 +147,7 @@ final class PlanetGenerator implements PlanetGeneratorInterface
             $res = $this->shadd($res, 703, "22");
             $res = $this->shadd($res, 704, "22");
             $res = $this->shadd($res, 705, "22");
+            $res = $this->shadd($res, 706, "22");
         }
 
         return $res;

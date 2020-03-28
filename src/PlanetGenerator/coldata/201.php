@@ -31,9 +31,9 @@ $eisn = rand(2, 3);
 $eiss = ($eisn == 3 ? 2 : rand(2, 3));
 
 $land = rand(35, 40);
-$berge = rand(5, 8);
+$berge = rand(6, 8);
 $desert = rand(3, 4);
-$trees = rand(10, 13);
+$trees = rand(9, 13);
 
 
 $ufels = rand(4, 7);
