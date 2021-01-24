@@ -122,6 +122,7 @@ final class PlanetGenerator implements PlanetGeneratorInterface
             $res = $this->shadd($res, 705, "12");
             $res = $this->shadd($res, 706, "12");
         }
+
         if (($btype == self::BONUS_DEUTERIUM) || ($btype == self::BONUS_ANYRESOURCE)) {
             $res = $this->shadd($res, 201, "11");
             $res = $this->shadd($res, 210, "11");
@@ -408,13 +409,11 @@ final class PlanetGenerator implements PlanetGeneratorInterface
                         $ta[$t] = $phase[$p][self::COLGEN_TO][$c];
                         $t++;
                     }
-
                 }
                 if ($t > 0) {
                     $colfields[$field[self::COLGEN_X]][$field[self::COLGEN_Y]] = $ta[rand(0, $t - 1)];
                 }
             }
-
         }
         return $colfields;
     }
@@ -457,7 +456,13 @@ final class PlanetGenerator implements PlanetGeneratorInterface
         if (!file_exists($fileName)) {
             throw new Exception('Planetgenerator description file missing for id ' . $id);
         }
-        return require_once $fileName;
+        $requireResult = require $fileName;
+
+        if (is_bool($requireResult)) {
+            throw new Exception('Error loading planetgenerator description file for id ' . $id);
+        }
+
+        return $requireResult;
     }
 
     public function generateColony(int $id, int $bonusfields = 2): array
@@ -601,5 +606,4 @@ final class PlanetGenerator implements PlanetGeneratorInterface
 
         return $this->combine($colfields, $orbfields, $gndfields);
     }
-
 }
