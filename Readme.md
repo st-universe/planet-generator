@@ -1,14 +1,20 @@
 STU3 Planet Surface Generator
 =============================
 
-Usage
+Nutzung
 -----
 
-See `PlanetGenerator` class.
+Siehe `PlanetGenerator` Klasse.
 
-Example
--------
+Beispiel
+--------
 
-`php -S localhost:1338 -t example`
+- Abhängigkeiten installieren `composer install`
+- Feld-Generator laufen lassen
+    ```php
+    php example/assets/generator/field_generator/generator.php
+    ````
+- PHP Webserver starten `php -S localhost:1338 -t example`
 
-Open `http://localhost:1338` in your webbrowser
+`http://localhost:1338` im Webbrowser öffnen. Mittels des `type` Parameters
+kann die Oberfläche eines beliebigen Planetentypen generiert werden.
