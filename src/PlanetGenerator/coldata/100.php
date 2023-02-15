@@ -1,13 +1,14 @@
 <?php
 
-use Stu\PlanetGenerator\PlanetGenerator;
+use Stu\Module\Colony\Lib\PlanetGenerator\PlanetGenerator;
 
 $data[PlanetGenerator::COLGEN_DETAILS] = "Klasse X";
 
-$data[PlanetGenerator::COLGEN_SIZEW] = 10;
-$data[PlanetGenerator::COLGEN_SIZEH] = 6;
+$data[PlanetGenerator::CONFIG_COLGEN_SIZEW] = 10;
+$data[PlanetGenerator::CONFIG_COLGEN_SIZEH] = 6;
 
-$hasground = 1;
+$hasGround = 1;
+$hasOrbit = 1;
 
 $data[PlanetGenerator::COLGEN_BASEFIELD] = 1000;
 $odata[PlanetGenerator::COLGEN_BASEFIELD] = 900;
@@ -19,7 +20,6 @@ $uphases = 0;
 
 // Surface Phases
 
-$phase[$phases][PlanetGenerator::COLGEN_MODE] = "forced rim";
 $phase[$phases][PlanetGenerator::COLGEN_MODE] = "polar seeding north";
 $phase[$phases][PlanetGenerator::COLGEN_DESCRIPTION] = "Gestein";
 $phase[$phases][PlanetGenerator::COLGEN_NUM] = 1;
@@ -689,8 +689,5 @@ return [
     [],
     $phase,
     [],
-    $ophases,
-    $phases,
-    $uphases,
-    $hasground
+    $hasGround, $hasOrbit
 ];

@@ -1,6 +1,6 @@
 <?php
 
-use Stu\PlanetGenerator\PlanetGenerator;
+use Stu\Module\Colony\Lib\PlanetGenerator\PlanetGenerator;
 
 $data[PlanetGenerator::COLGEN_DETAILS] = "Klasse O - Basisklasse Ozean";
 
@@ -11,10 +11,11 @@ $bonusdata = array(
     PlanetGenerator::BONUS_HABITAT
 );
 
-$data[PlanetGenerator::COLGEN_SIZEW] = 10;
-$data[PlanetGenerator::COLGEN_SIZEH] = 6;
+$data[PlanetGenerator::CONFIG_COLGEN_SIZEW] = 10;
+$data[PlanetGenerator::CONFIG_COLGEN_SIZEH] = 6;
 
-$hasground = 1;
+$hasGround = 1;
+$hasOrbit = 1;
 
 $data[PlanetGenerator::COLGEN_BASEFIELD] = 201;
 $odata[PlanetGenerator::COLGEN_BASEFIELD] = 900;
@@ -104,7 +105,7 @@ $ophase[$ophases][PlanetGenerator::COLGEN_NUM] = 10;
 $ophase[$ophases][PlanetGenerator::COLGEN_FROM] = array("0" => "900");
 $ophase[$ophases][PlanetGenerator::COLGEN_TO] = array("0" => "905");
 $ophase[$ophases][PlanetGenerator::COLGEN_ADJACENT] = 0;
-$ophase[$phases][PlanetGenerator::COLGEN_NOADJACENT] = 0;
+$ophase[$ophases][PlanetGenerator::COLGEN_NOADJACENT] = 0;
 $ophase[$ophases][PlanetGenerator::COLGEN_NOADJACENTLIMIT] = 0;
 $ophase[$ophases][PlanetGenerator::COLGEN_FRAGMENTATION] = 2;
 $ophases++;
@@ -140,8 +141,5 @@ return [
     $ophase,
     $phase,
     $uphase,
-    $ophases,
-    $phases,
-    $uphases,
-    $hasground
+    $hasGround, $hasOrbit
 ];

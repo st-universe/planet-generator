@@ -1,13 +1,14 @@
 <?php
 
-use Stu\PlanetGenerator\PlanetGenerator;
+use Stu\Module\Colony\Lib\PlanetGenerator\PlanetGenerator;
 
 $data[PlanetGenerator::COLGEN_DETAILS] = "Klasse ??";
 
-$data[PlanetGenerator::COLGEN_SIZEW] = 10;
-$data[PlanetGenerator::COLGEN_SIZEH] = 6;
+$data[PlanetGenerator::CONFIG_COLGEN_SIZEW] = 10;
+$data[PlanetGenerator::CONFIG_COLGEN_SIZEH] = 6;
 
-$hasground = 1;
+$hasGround = 1;
+$hasOrbit = 1;
 
 $data[PlanetGenerator::COLGEN_BASEFIELD] = 1000;
 $odata[PlanetGenerator::COLGEN_BASEFIELD] = 900;
@@ -21,11 +22,8 @@ return [
     $odata,
     $data,
     $udata,
-    $ophase,
     [],
     [],
-    $ophases,
-    $phases,
-    $uphases,
-    $hasground
+    [],
+    $hasGround, $hasOrbit
 ];

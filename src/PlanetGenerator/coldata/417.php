@@ -1,13 +1,14 @@
 <?php
 
-use Stu\PlanetGenerator\PlanetGenerator;
+use Stu\Module\Colony\Lib\PlanetGenerator\PlanetGenerator;
 
 $data[PlanetGenerator::COLGEN_DETAILS] = "Klasse X - Vulkanisch";
 
-$data[PlanetGenerator::COLGEN_SIZEW] = 7;
-$data[PlanetGenerator::COLGEN_SIZEH] = 5;
+$data[PlanetGenerator::CONFIG_COLGEN_SIZEW] = 7;
+$data[PlanetGenerator::CONFIG_COLGEN_SIZEH] = 5;
 
-$hasground = 0;
+$hasGround = 0;
+$hasOrbit = 1;
 
 $data[PlanetGenerator::COLGEN_BASEFIELD] = 918;
 $odata[PlanetGenerator::COLGEN_BASEFIELD] = 900;
@@ -25,7 +26,7 @@ $vulkan = rand(7, 8);
 
 
 $phase[$phases][PlanetGenerator::COLGEN_MODE] = "equatorial";
-$phase[$phases][PlanetGenerator::COLGEN_DESCRIPTION] = "Lava rechtsrunter";
+$phase[$phases][PlanetGenerator::COLGEN_DESCRIPTION] = "Lavastrom von rechts nach unten";
 $phase[$phases][PlanetGenerator::COLGEN_NUM] = 1;
 $phase[$phases][PlanetGenerator::COLGEN_FROM] = array("0" => "918");
 $phase[$phases][PlanetGenerator::COLGEN_TO] = array("0" => "909");
@@ -49,7 +50,7 @@ $phases++;
 
 
 $phase[$phases][PlanetGenerator::COLGEN_MODE] = "right";
-$phase[$phases][PlanetGenerator::COLGEN_DESCRIPTION] = "Vulkan links";
+$phase[$phases][PlanetGenerator::COLGEN_DESCRIPTION] = "Vulkan, Lavastrom links";
 $phase[$phases][PlanetGenerator::COLGEN_NUM] = 1;
 $phase[$phases][PlanetGenerator::COLGEN_FROM] = array("0" => "918");
 $phase[$phases][PlanetGenerator::COLGEN_TO] = array("0" => "906");
@@ -60,7 +61,7 @@ $phase[$phases][PlanetGenerator::COLGEN_FRAGMENTATION] = 1;
 $phases++;
 
 $phase[$phases][PlanetGenerator::COLGEN_MODE] = "below";
-$phase[$phases][PlanetGenerator::COLGEN_DESCRIPTION] = "Lava Ende";
+$phase[$phases][PlanetGenerator::COLGEN_DESCRIPTION] = "Lava Ende, Strom von oben";
 $phase[$phases][PlanetGenerator::COLGEN_NUM] = 1;
 $phase[$phases][PlanetGenerator::COLGEN_FROM] = array("0" => "918");
 $phase[$phases][PlanetGenerator::COLGEN_TO] = array("0" => "922");
@@ -171,9 +172,5 @@ return [
     [],
     $phase,
     $uphase,
-    $ophases,
-    $phases,
-    $uphases,
-    $hasground
+    $hasGround, $hasOrbit
 ];
-

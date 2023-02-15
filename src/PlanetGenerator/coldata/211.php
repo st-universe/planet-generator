@@ -1,15 +1,16 @@
 <?php
 
-use Stu\PlanetGenerator\PlanetGenerator;
+use Stu\Module\Colony\Lib\PlanetGenerator\PlanetGenerator;
 
 $data[PlanetGenerator::COLGEN_DETAILS] = "Klasse K - Basisklasse Ödland";
 
 $bonusdata = array(PlanetGenerator::BONUS_AENERGY, PlanetGenerator::BONUS_HABITAT, PlanetGenerator::BONUS_HABITAT);
 
-$data[PlanetGenerator::COLGEN_SIZEW] = 10;
-$data[PlanetGenerator::COLGEN_SIZEH] = 6;
+$data[PlanetGenerator::CONFIG_COLGEN_SIZEW] = 10;
+$data[PlanetGenerator::CONFIG_COLGEN_SIZEH] = 6;
 
-$hasground = 1;
+$hasGround = 1;
+$hasOrbit = 1;
 
 $data[PlanetGenerator::COLGEN_BASEFIELD] = 601;
 $odata[PlanetGenerator::COLGEN_BASEFIELD] = 900;
@@ -101,7 +102,7 @@ $ophase[$ophases][ColonyGenerator::COLGEN_NUM] = 10;
 $ophase[$ophases][ColonyGenerator::COLGEN_FROM] = array("0" => "100");
 $ophase[$ophases][ColonyGenerator::COLGEN_TO]   = array("0" => "120");
 $ophase[$ophases][ColonyGenerator::COLGEN_ADJACENT] = 0;
-$ophase[$phases][ColonyGenerator::COLGEN_NOADJACENT] = 0;
+$ophase[$ophases][ColonyGenerator::COLGEN_NOADJACENT] = 0;
 $ophase[$ophases][ColonyGenerator::COLGEN_NOADJACENTLIMIT] = 0;
 $ophase[$ophases][ColonyGenerator::COLGEN_FRAGMENTATION] = 2;
 $ophases++;
@@ -138,8 +139,5 @@ return [
     $ophase,
     $phase,
     $uphase,
-    $ophases,
-    $phases,
-    $uphases,
-    $hasground
+    $hasGround, $hasOrbit
 ];
