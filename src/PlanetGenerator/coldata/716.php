@@ -1,7 +1,7 @@
 <?php
 
-use Stu\Module\Colony\Lib\PlanetGenerator\GeneratorModeEnum;
-use Stu\Module\Colony\Lib\PlanetGenerator\PlanetGenerator;
+use Stu\PlanetGenerator\GeneratorModeEnum;
+use Stu\PlanetGenerator\PlanetGenerator;
 
 $data[PlanetGenerator::COLGEN_DETAILS] = "Klasse Dünner Asteroid";
 

@@ -1,6 +1,6 @@
 <?php
 
-use Stu\Module\Colony\Lib\PlanetGenerator\PlanetGenerator;
+use Stu\PlanetGenerator\PlanetGenerator;
 
 $data[PlanetGenerator::COLGEN_DETAILS] = "Klasse P-T - Eis - Wasser";
 

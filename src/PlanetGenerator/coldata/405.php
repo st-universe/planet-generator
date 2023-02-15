@@ -1,6 +1,6 @@
 <?php
 
-use Stu\Module\Colony\Lib\PlanetGenerator\PlanetGenerator;
+use Stu\PlanetGenerator\PlanetGenerator;
 
 $data[PlanetGenerator::COLGEN_DETAILS] = "Klasse O - Basisklasse Ozean";
 
@@ -99,15 +99,15 @@ $phases++;
 
 // Orbit Phases
 /*
-$ophase[$ophases][ColonyGenerator::COLGEN_MODE] = "lower orbit";
-$ophase[$ophases][ColonyGenerator::COLGEN_DESCRIPTION] = "Lower Orbit";
-$ophase[$ophases][ColonyGenerator::COLGEN_NUM] = 10;
-$ophase[$ophases][ColonyGenerator::COLGEN_FROM] = array("0" => "100");
-$ophase[$ophases][ColonyGenerator::COLGEN_TO]   = array("0" => "120");
-$ophase[$ophases][ColonyGenerator::COLGEN_ADJACENT] = 0;
-$ophase[$ophases][ColonyGenerator::COLGEN_NOADJACENT] = 0;
-$ophase[$ophases][ColonyGenerator::COLGEN_NOADJACENTLIMIT] = 0;
-$ophase[$ophases][ColonyGenerator::COLGEN_FRAGMENTATION] = 2;
+$ophase[$ophases][PlanetGenerator::COLGEN_MODE] = "lower orbit";
+$ophase[$ophases][PlanetGenerator::COLGEN_DESCRIPTION] = "Lower Orbit";
+$ophase[$ophases][PlanetGenerator::COLGEN_NUM] = 10;
+$ophase[$ophases][PlanetGenerator::COLGEN_FROM] = array("0" => "100");
+$ophase[$ophases][PlanetGenerator::COLGEN_TO]   = array("0" => "120");
+$ophase[$ophases][PlanetGenerator::COLGEN_ADJACENT] = 0;
+$ophase[$ophases][PlanetGenerator::COLGEN_NOADJACENT] = 0;
+$ophase[$ophases][PlanetGenerator::COLGEN_NOADJACENTLIMIT] = 0;
+$ophase[$ophases][PlanetGenerator::COLGEN_FRAGMENTATION] = 2;
 $ophases++;
 */
 
