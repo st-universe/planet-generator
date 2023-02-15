@@ -42,11 +42,5 @@
   },
   "scripts-descriptions": {
     "qa": "Executes alle qa related action"
-  },
-  "repositories": [
-    {
-      "type": "vcs",
-      "url": "git@github.com:st-universe/assets.git"
-    }
-  ]
+  }
 }
