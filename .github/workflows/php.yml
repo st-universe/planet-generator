@@ -1,0 +1,37 @@
+name: Unittests
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: ['ubuntu-latest']
+        php: ['7.4', '8.1', '8.2']
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+
+      - name: Validate composer.json and composer.lock
+        run: composer validate
+
+      - name: Install dependencies
+        uses: nick-invision/retry@v1
+        with:
+          timeout_minutes: 5
+          max_attempts: 3
+          command: composer update --no-interaction --no-progress
+
+      - name: Run test suite
+        run: composer run-script qa
+        env:
+          PHP_CS_FIXER_IGNORE_ENV: 1

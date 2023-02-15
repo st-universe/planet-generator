@@ -11,18 +11,16 @@
     }
   },
   "require": {
-    "php": "^7.4"
+    "php": "^7.4||^8"
   },
   "require-dev": {
     "phpunit/phpunit": "^9",
     "mockery/mockery": "^1.1",
     "st-universe/assets": "dev-master",
-    "mnsami/composer-custom-directory-installer": "^2"
+    "mnsami/composer-custom-directory-installer": "^2",
+    "phpstan/phpstan": "^1.9"
   },
   "config": {
-    "platform": {
-      "php": "7.4"
-    },
     "allow-plugins": {
       "mnsami/composer-custom-directory-installer": true
     }
@@ -33,6 +31,15 @@
         "st-universe/assets"
       ]
     }
+  },
+  "scripts": {
+    "stan": "phpstan",
+    "qa": [
+      "@composer stan"
+    ]
+  },
+  "scripts-descriptions": {
+    "qa": "Executes alle qa related action"
   },
   "repositories": [
     {
