@@ -1,5 +1,7 @@
 {
   "name": "st-universe/planet-generator",
+  "description": "ST-Universe planet surface generator",
+  "license": "MIT",
   "autoload": {
     "psr-4": {
       "Stu\\PlanetGenerator\\": "src/PlanetGenerator"
