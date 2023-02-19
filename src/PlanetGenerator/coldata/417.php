@@ -2,6 +2,8 @@
 
 use Stu\PlanetGenerator\PlanetGenerator;
 
+$data = $odata = $udata = $phase = $uphase = [];
+
 $data[PlanetGenerator::COLGEN_DETAILS] = "Klasse X - Vulkanisch";
 
 $data[PlanetGenerator::CONFIG_COLGEN_SIZEW] = 7;

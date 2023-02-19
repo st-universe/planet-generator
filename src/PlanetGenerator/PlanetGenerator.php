@@ -2,9 +2,55 @@
 
 namespace Stu\PlanetGenerator;
 
+use DirectoryIterator;
+use Generator;
+use SplFileInfo;
 use Stu\PlanetGenerator\Exception\PlanetGeneratorException;
 use Stu\PlanetGenerator\Exception\PlanetGeneratorFileMissingException;
 
+/**
+ * @template TConfig of array{
+ *  0: array{
+ *    0: TPhase,
+ *    1: TPhase,
+ *    2: TPhase,
+ *    3: int,
+ *    4: int
+ *  },
+ *  sizew: int,
+ *  sizeh: int,
+ *  name: string,
+ *  1: int,
+ *  2: int,
+ *  3: int
+ * }
+ * @template TPhase of array{
+ *  mode: string,
+ *  description: string,
+ *  num: int,
+ *  from: array<int, int>,
+ *  to: array<int, int>,
+ *  adjacent: array<int>,
+ *  noadjacent: int,
+ *  noadjacentlimit: int,
+ *  fragmentation: int
+ * }
+ * @template TPlanetConfig of array{
+ *  0: array{basefield: int},
+ *  1: array{
+ *    details: string,
+ *    sizew: int,
+ *    sizeh: int,
+ *    basefield: int
+ *  },
+ *  2: array{basefield: int},
+ *  3: array<int, TPhase>,
+ *  4: array<int, TPhase>,
+ *  5: array<int, TPhase>,
+ *  6: int,
+ *  7: int
+ * }
+ */
 final class PlanetGenerator implements PlanetGeneratorInterface
 {
     //phase settings
@@ -51,9 +97,12 @@ final class PlanetGenerator implements PlanetGeneratorInterface
     private const CONFIG_BASEFIELD_COLONY = 1;
     private const CONFIG_BASEFIELD_ORBIT = 2;
     private const CONFIG_BASEFIELD_UNDERGROUND = 3;
+    private const CONFIG_NAME = 'name';
 
     /**
      * @throws PlanetGeneratorException
+     *
+     * @return TConfig
      */
     public function loadColonyClassConfig(int $planetTypeId): array
     {
@@ -65,7 +114,8 @@ final class PlanetGenerator implements PlanetGeneratorInterface
             self::CONFIG_COLGEN_SIZEH => $data[self::CONFIG_COLGEN_SIZEH],
             self::CONFIG_BASEFIELD_COLONY => $data[self::COLGEN_BASEFIELD],
             self::CONFIG_BASEFIELD_ORBIT => $odata[self::COLGEN_BASEFIELD],
-            self::CONFIG_BASEFIELD_UNDERGROUND => $udata[self::COLGEN_BASEFIELD]
+            self::CONFIG_BASEFIELD_UNDERGROUND => $udata[self::COLGEN_BASEFIELD],
+            self::CONFIG_NAME => $data[self::COLGEN_DETAILS],
         ];
     }
 
@@ -76,8 +126,6 @@ final class PlanetGenerator implements PlanetGeneratorInterface
         int $planetTypeId,
         int $bonusFieldAmount
     ): array {
-        $bonusdata = [];
-
         $config = $this->loadColonyClassConfig($planetTypeId);
         [$ophase, $phase, $uphase, $hasGround, $hasOrbit] = $config[0];
 
@@ -88,10 +136,7 @@ final class PlanetGenerator implements PlanetGeneratorInterface
 
         $bftaken = 0;
         $phaseSuperCount = 0;
-        $phasesOreCount = 0;
-        $phasesDeutCount = 0;
         $phasesResourceCount = 0;
-        $phasesOther = 0;
 
         if (($bftaken < $bonusFieldAmount) && (rand(1, 100) <= 15)) {
             $phaseSuperCount += 1;
@@ -104,22 +149,13 @@ final class PlanetGenerator implements PlanetGeneratorInterface
         if (($phaseSuperCount == 0) && ($config[self::CONFIG_COLGEN_SIZEW] > 7)) {
             if (($bftaken < $bonusFieldAmount) && (rand(1, 100) <= 10)) {
                 $phasesResourceCount += 1;
-                $bftaken += 1;
             }
-        }
-
-        if ($bftaken < $bonusFieldAmount) {
-            $restcount = $bonusFieldAmount - $bftaken;
-
-            $phasesOther += $restcount;
-            $bftaken += $restcount;
         }
 
         $bonusPhaseCount = 0;
 
         // Bonus Phases
 
-        unset($taken);
         $bphase = [];
 
         for ($i = 0; $i < $phaseSuperCount; $i++) {
@@ -132,44 +168,29 @@ final class PlanetGenerator implements PlanetGeneratorInterface
             $bonusPhaseCount++;
         }
 
-        for ($i = 0; $i < $phasesDeutCount; $i++) {
-            $bphase[$bonusPhaseCount] = $this->createBonusPhase(self::BONUS_DEUTERIUM);
-            $bonusPhaseCount++;
-        }
-
-        for ($i = 0; $i < $phasesOreCount; $i++) {
-            $bphase[$bonusPhaseCount] = $this->createBonusPhase(self::BONUS_ORE);
-            $bonusPhaseCount++;
-        }
-
-
-        for ($i = 0; $i < $phasesOther; $i++) {
-            if (count($bonusdata) == 0) {
-                break;
-            }
-
-            shuffle($bonusdata);
-            $next = array_shift($bonusdata);
-
-            $bphase[$bonusPhaseCount] = $this->createBonusPhase($next);
-            $bonusPhaseCount++;
-        }
         // end bonus
-
         $phases = [
-            self::PHASE_COLONY => $phase, self::PHASE_ORBIT => $ophase, self::PHASE_UNDERGROUND => $uphase, self::PHASE_BONUS => $bphase
+            self::PHASE_COLONY => $phase,
+            self::PHASE_ORBIT => $ophase,
+            self::PHASE_UNDERGROUND => $uphase,
+            self::PHASE_BONUS => $bphase,
         ];
 
         [$colonyFields, $orbitFields, $undergroundFields] = $this->doPhases($config, $phases, $hasGround, $hasOrbit);
 
         return [
+            'name' => $config[self::CONFIG_NAME],
             'surfaceWidth' => $config[self::CONFIG_COLGEN_SIZEW],
             'surfaceFields' => $this->combine($colonyFields, $orbitFields, $undergroundFields),
         ];
     }
 
-    private function doPhases(array $config, array $phases, bool $hasGround, bool $hasOrbit): array
-    {
+    private function doPhases(
+        array $config,
+        array $phases,
+        int $hasGround,
+        int $hasOrbit
+    ): array {
         [$colonyFields, $orbitFields, $undergroundFields] = $this->initFields($config, $hasGround, $hasOrbit);
 
         if (!empty($phases[self::PHASE_COLONY])) {
@@ -200,6 +221,21 @@ final class PlanetGenerator implements PlanetGeneratorInterface
             }
         }
         return [$colonyFields, $orbitFields, $undergroundFields];
+    }
+
+    /**
+     * @return Generator<int>
+     */
+    public function getSupportedPlanetTypes(): Generator
+    {
+        $list = new DirectoryIterator(__DIR__ . '/coldata');
+
+        /** @var SplFileInfo $file */
+        foreach ($list as $file) {
+            if (!$file->isDir()) {
+                yield (int) str_replace('.php', '', $file->getFilename());
+            }
+        }
     }
 
     private function initFields(array $config, bool $hasGround, bool $hasOrbit): array
@@ -242,6 +278,8 @@ final class PlanetGenerator implements PlanetGeneratorInterface
 
     /**
      * @throws PlanetGeneratorFileMissingException
+     *
+     * @return TPlanetConfig
      */
     private function loadColonyClass(int $id): array
     {
@@ -266,10 +304,10 @@ final class PlanetGenerator implements PlanetGeneratorInterface
         return $requireResult;
     }
 
-    private function weightedDraw($a, $fragmentation = 0)
+    private function weightedDraw(array $a, int $fragmentation = 0): array
     {
         for ($i = 0; $i < count($a); $i++) {
-            $a[$i][self::COLGEN_WEIGHT] = rand(1, ceil($a[$i][self::COLGEN_BASEWEIGHT] + $fragmentation));
+            $a[$i][self::COLGEN_WEIGHT] = rand(1, (int) ceil($a[$i][self::COLGEN_BASEWEIGHT] + $fragmentation));
         }
         usort($a, function ($a, $b) {
             if ($a[self::COLGEN_WEIGHT] < $b[self::COLGEN_WEIGHT]) {
@@ -284,16 +322,15 @@ final class PlanetGenerator implements PlanetGeneratorInterface
         return $a[0];
     }
 
-    private function shadd($arr, $fld, $bonus)
+    private function shadd(array $arr, int $fld, string $bonus): array
     {
-
         array_push($arr[self::COLGEN_FROM], $fld);
         array_push($arr[self::COLGEN_TO], $fld . $bonus);
 
         return $arr;
     }
 
-    private function getBonusFieldTransformations($btype)
+    private function getBonusFieldTransformations(int $btype): array
     {
         $res = array();
         $res[self::COLGEN_FROM] = [];
@@ -395,7 +432,21 @@ final class PlanetGenerator implements PlanetGeneratorInterface
         return $bphase;
     }
 
-    private function getWeightingList(array $fields, $mode, array $from, $to, $adjacent, $no_adjacent, $noadjacentlimit = 0): ?array
+    /**
+     * @param int|array<int, int> $adjacent
+     * @param int|array<int, int> $no_adjacent
+     *
+     * @return array|null
+     */
+    private function getWeightingList(
+        array $fields,
+        string $mode,
+        array $from,
+        array $to,
+        $adjacent,
+        $no_adjacent,
+        int $noadjacentlimit = 0
+    ): ?array
     {
         $res = null;
 
@@ -593,7 +644,25 @@ final class PlanetGenerator implements PlanetGeneratorInterface
         return $res;
     }
 
-    private function doPhase(array $phase, $fields)
+    /**
+     * @param array{
+     *  mode: string,
+     *  num: int,
+     *  from: array<int, int>,
+     *  to: array<int, int>,
+     *  adjacent: int,
+     *  noadjacent: int,
+     *  noadjacentlimit: int,
+     *  fragmentation: int
+     * } $phase
+     * @param array{
+     *  y: int,
+     *  w: int
+     * } $fields
+     *
+     * @return array<int, array<int>>
+     */
+    private function doPhase(array $phase, array $fields): array
     {
         if ($phase[self::COLGEN_MODE] == "fullsurface") {
             $k = 0;

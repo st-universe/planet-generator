@@ -1,6 +1,7 @@
 <?php
 
 use Stu\PlanetGenerator\PlanetGenerator;
+use Stu\PlanetGenerator\PlanetGeneratorInterface;
 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
@@ -13,19 +14,38 @@ require_once __DIR__.'/../vendor/autoload.php';
  */
 error_reporting(E_ERROR);
 
-$planetTypeId = $_GET['type'] ?? 401;
+$planetTypeId = $_GET['type'] ?? null;
 
 $planetGenerator = new PlanetGenerator();
 
-$config = $planetGenerator->generateColony($planetTypeId, 2);
-$sep = $config['surfaceWidth'];
+function buildSurface(
+    PlanetGeneratorInterface $planetGenerator,
+    int $planetTypeId
+): void {
+    $config = $planetGenerator->generateColony($planetTypeId, 2);
+    $sep = $config['surfaceWidth'];
 
-foreach ($config['surfaceFields'] as $key => $field) {
-    echo sprintf(
-        '<img src="assets/generated/fields/%d.png" />',
-        $field
-    );
-    if (((int) $key + 1) % $sep === 0) {
-        echo '<br />';
+    $surface = '';
+
+    foreach ($config['surfaceFields'] as $key => $field) {
+        $surface .= sprintf(
+            '<img src="assets/generated/fields/%d.png" />',
+            $field
+        );
+        if (((int) $key + 1) % $sep === 0) {
+            $surface .= '<br />';
+        }
     }
+
+    echo sprintf('<div><h2>%d - %s</h2><div>%s</div></div>', $planetTypeId, $config['name'], $surface);
+}
+
+if ($planetTypeId === null) {
+    $typeIds = $planetGenerator->getSupportedPlanetTypes();
+
+    foreach ($typeIds as $typeId) {
+        buildSurface($planetGenerator, $typeId);
+    }
+} else {
+    buildSurface($planetGenerator, $planetTypeId);
 }

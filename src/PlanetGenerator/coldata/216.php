@@ -2,6 +2,8 @@
 
 use Stu\PlanetGenerator\PlanetGenerator;
 
+$data = $odata = $udata = $phase = $uphase = $ophase = [];
+
 $data[PlanetGenerator::COLGEN_DETAILS] = "Klasse P-T - Eis - Wasser";
 
 $bonusdata = array(

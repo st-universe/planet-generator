@@ -38,9 +38,14 @@
     "stan": "phpstan",
     "qa": [
       "@composer stan"
+    ],
+    "gen:assets": [
+      "@php example/assets/generator/building_generator/gen.php",
+      "@php example/assets/generator/field_generator/generator.php"
     ]
   },
   "scripts-descriptions": {
-    "qa": "Executes alle qa related action"
+    "qa": "Executes alle qa related action",
+    "gen:assets": "Generates asset images"
   }
 }

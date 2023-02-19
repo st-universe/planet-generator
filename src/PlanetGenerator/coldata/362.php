@@ -3,6 +3,8 @@
 use Stu\PlanetGenerator\GeneratorModeEnum;
 use Stu\PlanetGenerator\PlanetGenerator;
 
+$data = $odata = $udata = $phase = $uphase = $ophase = [];
+
 $data[PlanetGenerator::COLGEN_DETAILS] = "Klasse I/J (blau) mit Ring";
 
 $data[PlanetGenerator::CONFIG_COLGEN_SIZEW] = 10;

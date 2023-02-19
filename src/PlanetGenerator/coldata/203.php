@@ -2,6 +2,8 @@
 
 use Stu\PlanetGenerator\PlanetGenerator;
 
+$data = $odata = $udata = $phase = $uphase = [];
+
 $data[PlanetGenerator::COLGEN_DETAILS] = "Klasse L - Basisklasse Wald";
 
 $bonusdata = array(

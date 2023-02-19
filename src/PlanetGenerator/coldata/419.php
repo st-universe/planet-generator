@@ -2,6 +2,8 @@
 
 use Stu\PlanetGenerator\PlanetGenerator;
 
+$data = $odata = $udata = $phase = $uphase = [];
+
 $data[PlanetGenerator::COLGEN_DETAILS] = "Klasse G Mond - Tundra";
 
 $bonusdata = array(PlanetGenerator::BONUS_AENERGY, PlanetGenerator::BONUS_HABITAT, PlanetGenerator::BONUS_HABITAT);

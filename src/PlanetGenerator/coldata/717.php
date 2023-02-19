@@ -3,6 +3,8 @@
 use Stu\PlanetGenerator\GeneratorModeEnum;
 use Stu\PlanetGenerator\PlanetGenerator;
 
+$data = $odata = $udata = $phase = $uphase = [];
+
 $data[PlanetGenerator::COLGEN_DETAILS] = "Klasse Mittlerer Asteroid";
 
 $data[PlanetGenerator::CONFIG_COLGEN_SIZEW] = 6;

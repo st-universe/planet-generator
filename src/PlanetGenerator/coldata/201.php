@@ -2,6 +2,8 @@
 
 use Stu\PlanetGenerator\PlanetGenerator;
 
+$data = $odata = $udata = $phase = $uphase = [];
+
 $data[PlanetGenerator::COLGEN_DETAILS] = "Klasse M - Basisklasse Erdähnlich";
 
 $bonusdata = array(

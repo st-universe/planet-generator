@@ -3,6 +3,8 @@
 use Stu\PlanetGenerator\GeneratorModeEnum;
 use Stu\PlanetGenerator\PlanetGenerator;
 
+$data = $odata = $udata = $phase = $uphase = [];
+
 $data[PlanetGenerator::COLGEN_DETAILS] = "Klasse Dichter Eistasteorid";
 
 $data[PlanetGenerator::CONFIG_COLGEN_SIZEW] = 6;
@@ -425,5 +427,6 @@ return [
     [],
     $phase,
     $uphase,
-    $hasGround, $hasOrbit
+    $hasGround,
+    $hasOrbit
 ];

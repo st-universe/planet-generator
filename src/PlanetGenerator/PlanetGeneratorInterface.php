@@ -7,21 +7,13 @@ use Stu\PlanetGenerator\Exception\PlanetGeneratorException;
 interface PlanetGeneratorInterface
 {
     /**
-     * @return array{
-     *     sizew: int,
-     *     sizeh: int,
-     *     0: array<mixed>,
-     *     1: array<mixed>,
-     *     2: array<mixed>,
-     *     3: array<mixed>
-     * }
      *
      * @throws PlanetGeneratorException
      */
     public function loadColonyClassConfig(int $planetTypeId): array;
 
     /**
-     * @return array{surfaceWidth: int, surfaceFields: array<int, int>}
+     * @return array{name: string, surfaceWidth: int, surfaceFields: array<int, int>}
      *
      * @throws PlanetGeneratorException
      */

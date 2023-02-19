@@ -2,6 +2,8 @@
 
 use Stu\PlanetGenerator\PlanetGenerator;
 
+$data = $odata = $udata = $phase = [];
+
 $data[PlanetGenerator::COLGEN_DETAILS] = "Klasse X";
 
 $data[PlanetGenerator::CONFIG_COLGEN_SIZEW] = 10;
@@ -689,5 +691,6 @@ return [
     [],
     $phase,
     [],
-    $hasGround, $hasOrbit
+    $hasGround,
+    $hasOrbit
 ];
