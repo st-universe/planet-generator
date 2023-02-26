@@ -484,25 +484,25 @@ final class PlanetGenerator implements PlanetGeneratorInterface
                         if ($w > 0 && $fields[$w - 1][$h] == $to[$k]) {
                             $bw += 1;
                         }
-                        if ($w != $width && $fields[$w + 1][$h] == $to[$k]) {
+                        if ($w < ($width - 1) && $fields[$w + 1][$h] == $to[$k]) {
                             $bw += 1;
                         }
                         if ($h > 0 && $fields[$w][$h - 1] == $to[$k]) {
                             $bw += 1;
                         }
-                        if ($h != $height && $fields[$w][$h + 1] == $to[$k]) {
+                        if ($h < ($height - 1) && $fields[$w][$h + 1] == $to[$k]) {
                             $bw += 1;
                         }
                         if ($w > 0 && $h > 0 && $fields[$w - 1][$h - 1] == $to[$k]) {
                             $bw += 0.5;
                         }
-                        if ($w != $width && $h != $height && $fields[$w + 1][$h + 1] == $to[$k]) {
+                        if ($w < ($width - 1) && $h < ($height - 1) && $fields[$w + 1][$h + 1] == $to[$k]) {
                             $bw += 0.5;
                         }
-                        if ($w != $width && $h > 0 && $fields[$w + 1][$h - 1] == $to[$k]) {
+                        if ($w < ($width - 1) && $h > 0 && $fields[$w + 1][$h - 1] == $to[$k]) {
                             $bw += 0.5;
                         }
-                        if ($w > 0 && $h != $height && $fields[$w - 1][$h + 1] == $to[$k]) {
+                        if ($w > 0 && $h < ($height - 1) && $fields[$w - 1][$h + 1] == $to[$k]) {
                             $bw += 0.5;
                         }
                     }
@@ -513,7 +513,7 @@ final class PlanetGenerator implements PlanetGeneratorInterface
                         if ($w > 0 && $fields[$w - 1][$h] == $to[$k]) {
                             $bw += 2;
                         }
-                        if ($w != $width && $fields[$w + 1][$h] == $to[$k]) {
+                        if ($w < ($width - 1) && $fields[$w + 1][$h] == $to[$k]) {
                             $bw += 2;
                         }
                     }
@@ -524,25 +524,25 @@ final class PlanetGenerator implements PlanetGeneratorInterface
                         if ($w > 0 && $fields[$w - 1][$h] == $adjacent[$k]) {
                             $bw += 1;
                         }
-                        if ($w != $width && $fields[$w + 1][$h] == $adjacent[$k]) {
+                        if ($w < ($width - 1) && $fields[$w + 1][$h] == $adjacent[$k]) {
                             $bw += 1;
                         }
                         if ($h > 0 && $fields[$w][$h - 1] == $adjacent[$k]) {
                             $bw += 1;
                         }
-                        if ($h != $height && $fields[$w][$h + 1] == $adjacent[$k]) {
+                        if ($h < ($height - 1) && $fields[$w][$h + 1] == $adjacent[$k]) {
                             $bw += 1;
                         }
                         if ($w > 0 && $h > 0 && $fields[$w - 1][$h - 1] == $adjacent[$k]) {
                             $bw += 0.5;
                         }
-                        if ($w != $width && $h != $height && $fields[$w + 1][$h + 1] == $adjacent[$k]) {
+                        if ($w < ($width - 1) && $h < ($height - 1) && $fields[$w + 1][$h + 1] == $adjacent[$k]) {
                             $bw += 0.5;
                         }
-                        if ($w != $width &&  $h > 0 && $fields[$w + 1][$h - 1] == $adjacent[$k]) {
+                        if ($w < ($width - 1) &&  $h > 0 && $fields[$w + 1][$h - 1] == $adjacent[$k]) {
                             $bw += 0.5;
                         }
-                        if ($w > 0 && $h != $height && $fields[$w - 1][$h + 1] == $adjacent[$k]) {
+                        if ($w > 0 && $h < ($height - 1) && $fields[$w - 1][$h + 1] == $adjacent[$k]) {
                             $bw += 0.5;
                         }
                     }
@@ -554,25 +554,25 @@ final class PlanetGenerator implements PlanetGeneratorInterface
                         if ($w > 0 && $fields[$w - 1][$h] == $no_adjacent[$k]) {
                             $ad += 1;
                         }
-                        if ($w != $width &&  $fields[$w + 1][$h] == $no_adjacent[$k]) {
+                        if ($w < ($width - 1) &&  $fields[$w + 1][$h] == $no_adjacent[$k]) {
                             $ad += 1;
                         }
                         if ($h > 0 && $fields[$w][$h - 1] == $no_adjacent[$k]) {
                             $ad += 1;
                         }
-                        if ($h != $height && $fields[$w][$h + 1] == $no_adjacent[$k]) {
+                        if ($h < ($height - 1) && $fields[$w][$h + 1] == $no_adjacent[$k]) {
                             $ad += 1;
                         }
                         if ($w > 0 && $h > 0 && $fields[$w - 1][$h - 1] == $no_adjacent[$k]) {
                             $ad += 0.5;
                         }
-                        if ($h != $height && $fields[$w + 1][$h + 1] == $no_adjacent[$k]) {
+                        if ($h < ($height - 1) && $fields[$w + 1][$h + 1] == $no_adjacent[$k]) {
                             $ad += 0.5;
                         }
-                        if ($w != $width &&  $h > 0 && $fields[$w + 1][$h - 1] == $no_adjacent[$k]) {
+                        if ($w < ($width - 1) &&  $h > 0 && $fields[$w + 1][$h - 1] == $no_adjacent[$k]) {
                             $ad += 0.5;
                         }
-                        if ($w > 0 && $h != $height && $fields[$w - 1][$h + 1] == $no_adjacent[$k]) {
+                        if ($w > 0 && $h < ($height - 1) && $fields[$w - 1][$h + 1] == $no_adjacent[$k]) {
                             $ad += 0.5;
                         }
 
