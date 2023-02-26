@@ -1,0 +1,151 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Cannot access offset 0 on array\\<int, int\\>\\|int\\.$#"
+			count: 2
+			path: src/PlanetGenerator/PlanetGenerator.php
+
+		-
+			message: "#^Cannot access offset int\\<0, 1\\> on 0\\|non\\-empty\\-array\\<int\\<0, 1\\>, mixed\\>\\.$#"
+			count: 2
+			path: src/PlanetGenerator/PlanetGenerator.php
+
+		-
+			message: "#^Cannot access offset int\\<0, max\\> on non\\-empty\\-array\\<int\\<0, max\\>, \\(float\\|int\\)\\>\\|int\\.$#"
+			count: 1
+			path: src/PlanetGenerator/PlanetGenerator.php
+
+		-
+			message: "#^Method Stu\\\\PlanetGenerator\\\\PlanetGenerator\\:\\:combine\\(\\) has parameter \\$col with no type specified\\.$#"
+			count: 1
+			path: src/PlanetGenerator/PlanetGenerator.php
+
+		-
+			message: "#^Method Stu\\\\PlanetGenerator\\\\PlanetGenerator\\:\\:combine\\(\\) has parameter \\$gnd with no type specified\\.$#"
+			count: 1
+			path: src/PlanetGenerator/PlanetGenerator.php
+
+		-
+			message: "#^Method Stu\\\\PlanetGenerator\\\\PlanetGenerator\\:\\:combine\\(\\) has parameter \\$orb with no type specified\\.$#"
+			count: 1
+			path: src/PlanetGenerator/PlanetGenerator.php
+
+		-
+			message: "#^Method Stu\\\\PlanetGenerator\\\\PlanetGenerator\\:\\:createBonusPhase\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/PlanetGenerator/PlanetGenerator.php
+
+		-
+			message: "#^Method Stu\\\\PlanetGenerator\\\\PlanetGenerator\\:\\:createBonusPhase\\(\\) has parameter \\$btype with no type specified\\.$#"
+			count: 1
+			path: src/PlanetGenerator/PlanetGenerator.php
+
+		-
+			message: "#^Method Stu\\\\PlanetGenerator\\\\PlanetGenerator\\:\\:doPhase\\(\\) should return array\\<int, array\\<int\\>\\> but returns array\\<int\\|string, mixed\\>\\.$#"
+			count: 1
+			path: src/PlanetGenerator/PlanetGenerator.php
+
+		-
+			message: "#^Method Stu\\\\PlanetGenerator\\\\PlanetGenerator\\:\\:doPhases\\(\\) has parameter \\$config with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/PlanetGenerator/PlanetGenerator.php
+
+		-
+			message: "#^Method Stu\\\\PlanetGenerator\\\\PlanetGenerator\\:\\:doPhases\\(\\) has parameter \\$phases with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/PlanetGenerator/PlanetGenerator.php
+
+		-
+			message: "#^Method Stu\\\\PlanetGenerator\\\\PlanetGenerator\\:\\:doPhases\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/PlanetGenerator/PlanetGenerator.php
+
+		-
+			message: "#^Method Stu\\\\PlanetGenerator\\\\PlanetGenerator\\:\\:getBonusFieldTransformations\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/PlanetGenerator/PlanetGenerator.php
+
+		-
+			message: "#^Method Stu\\\\PlanetGenerator\\\\PlanetGenerator\\:\\:getWeightingList\\(\\) has parameter \\$fields with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/PlanetGenerator/PlanetGenerator.php
+
+		-
+			message: "#^Method Stu\\\\PlanetGenerator\\\\PlanetGenerator\\:\\:getWeightingList\\(\\) has parameter \\$from with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/PlanetGenerator/PlanetGenerator.php
+
+		-
+			message: "#^Method Stu\\\\PlanetGenerator\\\\PlanetGenerator\\:\\:getWeightingList\\(\\) has parameter \\$to with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/PlanetGenerator/PlanetGenerator.php
+
+		-
+			message: "#^Method Stu\\\\PlanetGenerator\\\\PlanetGenerator\\:\\:getWeightingList\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/PlanetGenerator/PlanetGenerator.php
+
+		-
+			message: "#^Method Stu\\\\PlanetGenerator\\\\PlanetGenerator\\:\\:initFields\\(\\) has parameter \\$config with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/PlanetGenerator/PlanetGenerator.php
+
+		-
+			message: "#^Method Stu\\\\PlanetGenerator\\\\PlanetGenerator\\:\\:initFields\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/PlanetGenerator/PlanetGenerator.php
+
+		-
+			message: "#^Method Stu\\\\PlanetGenerator\\\\PlanetGenerator\\:\\:loadColonyClassConfig\\(\\) should return TConfig of array\\{0\\: array\\{TPhase of array\\{mode\\: string, description\\: string, num\\: int, from\\: array\\<int, int\\>, to\\: array\\<int, int\\>, adjacent\\: array\\<int\\>, noadjacent\\: int, noadjacentlimit\\: int, \\.\\.\\.\\}, TPhase of array\\{mode\\: string, description\\: string, num\\: int, from\\: array\\<int, int\\>, to\\: array\\<int, int\\>, adjacent\\: array\\<int\\>, noadjacent\\: int, noadjacentlimit\\: int, \\.\\.\\.\\}, TPhase of array\\{mode\\: string, description\\: string, num\\: int, from\\: array\\<int, int\\>, to\\: array\\<int, int\\>, adjacent\\: array\\<int\\>, noadjacent\\: int, noadjacentlimit\\: int, \\.\\.\\.\\}, int, int\\}, sizew\\: int, sizeh\\: int, name\\: string, 1\\: int, 2\\: int, 3\\: int\\} but returns array\\{0\\: array\\{array\\<int, TPhase of array\\{mode\\: string, description\\: string, num\\: int, from\\: array\\<int, int\\>, to\\: array\\<int, int\\>, adjacent\\: array\\<int\\>, noadjacent\\: int, noadjacentlimit\\: int, \\.\\.\\.\\}\\>, array\\<int, TPhase of array\\{mode\\: string, description\\: string, num\\: int, from\\: array\\<int, int\\>, to\\: array\\<int, int\\>, adjacent\\: array\\<int\\>, noadjacent\\: int, noadjacentlimit\\: int, \\.\\.\\.\\}\\>, array\\<int, TPhase of array\\{mode\\: string, description\\: string, num\\: int, from\\: array\\<int, int\\>, to\\: array\\<int, int\\>, adjacent\\: array\\<int\\>, noadjacent\\: int, noadjacentlimit\\: int, \\.\\.\\.\\}\\>, int, int\\}, sizew\\: int, sizeh\\: int, 1\\: int, 2\\: int, 3\\: int, name\\: string\\}\\.$#"
+			count: 1
+			path: src/PlanetGenerator/PlanetGenerator.php
+
+		-
+			message: "#^Method Stu\\\\PlanetGenerator\\\\PlanetGenerator\\:\\:shadd\\(\\) has parameter \\$arr with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/PlanetGenerator/PlanetGenerator.php
+
+		-
+			message: "#^Method Stu\\\\PlanetGenerator\\\\PlanetGenerator\\:\\:shadd\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/PlanetGenerator/PlanetGenerator.php
+
+		-
+			message: "#^Method Stu\\\\PlanetGenerator\\\\PlanetGenerator\\:\\:weightedDraw\\(\\) has parameter \\$a with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/PlanetGenerator/PlanetGenerator.php
+
+		-
+			message: "#^Method Stu\\\\PlanetGenerator\\\\PlanetGenerator\\:\\:weightedDraw\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/PlanetGenerator/PlanetGenerator.php
+
+		-
+			message: "#^Offset 'type' does not exist on array\\{mode\\: 'fullsurface', num\\: int, from\\: array\\<int, int\\>, to\\: array\\<int, int\\>, adjacent\\: int, noadjacent\\: int, noadjacentlimit\\: int, fragmentation\\: int\\}\\.$#"
+			count: 1
+			path: src/PlanetGenerator/PlanetGenerator.php
+
+		-
+			message: "#^PHPDoc tag @var with type SplFileInfo is not subtype of native type DirectoryIterator\\.$#"
+			count: 1
+			path: src/PlanetGenerator/PlanetGenerator.php
+
+		-
+			message: "#^Parameter \\#2 \\$hasGround of method Stu\\\\PlanetGenerator\\\\PlanetGenerator\\<TConfig of array\\<int\\|string, array\\<int, array\\<string, array\\<int\\>\\|int\\|string\\>\\|int\\>\\|int\\|string\\>,TPhase of array\\<string, array\\<int\\>\\|int\\|string\\>,TPlanetConfig of array\\<int, array\\<int\\|string, array\\<string, array\\<int\\>\\|int\\|string\\>\\|int\\|string\\>\\|int\\>\\>\\:\\:initFields\\(\\) expects bool, int given\\.$#"
+			count: 1
+			path: src/PlanetGenerator/PlanetGenerator.php
+
+		-
+			message: "#^Parameter \\#3 \\$hasOrbit of method Stu\\\\PlanetGenerator\\\\PlanetGenerator\\<TConfig of array\\<int\\|string, array\\<int, array\\<string, array\\<int\\>\\|int\\|string\\>\\|int\\>\\|int\\|string\\>,TPhase of array\\<string, array\\<int\\>\\|int\\|string\\>,TPlanetConfig of array\\<int, array\\<int\\|string, array\\<string, array\\<int\\>\\|int\\|string\\>\\|int\\|string\\>\\|int\\>\\>\\:\\:initFields\\(\\) expects bool, int given\\.$#"
+			count: 1
+			path: src/PlanetGenerator/PlanetGenerator.php
+
+		-
+			message: "#^Variable \\$ta might not be defined\\.$#"
+			count: 1
+			path: src/PlanetGenerator/PlanetGenerator.php
+
+		-
+			message: "#^Method Stu\\\\PlanetGenerator\\\\PlanetGeneratorInterface\\:\\:loadColonyClassConfig\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/PlanetGenerator/PlanetGeneratorInterface.php
