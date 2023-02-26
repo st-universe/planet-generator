@@ -519,7 +519,7 @@ final class PlanetGenerator implements PlanetGeneratorInterface
                     }
                 }
 
-                if ($adjacent[0]) {
+                if (is_array($adjacent)) {
                     for ($k = 0; $k < count($adjacent); $k++) {
                         if ($w > 0 && $fields[$w - 1][$h] == $adjacent[$k]) {
                             $bw += 1;
@@ -548,7 +548,7 @@ final class PlanetGenerator implements PlanetGeneratorInterface
                     }
                 }
 
-                if ($no_adjacent[0]) {
+                if (is_array($no_adjacent)) {
                     for ($k = 0; $k < count($no_adjacent); $k++) {
                         $ad = 0;
                         if ($w > 0 && $fields[$w - 1][$h] == $no_adjacent[$k]) {
