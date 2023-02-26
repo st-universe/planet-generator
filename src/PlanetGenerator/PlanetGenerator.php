@@ -446,8 +446,7 @@ final class PlanetGenerator implements PlanetGeneratorInterface
         $adjacent,
         $no_adjacent,
         int $noadjacentlimit = 0
-    ): ?array
-    {
+    ): ?array {
         $res = null;
 
         $width = count($fields);
@@ -482,28 +481,28 @@ final class PlanetGenerator implements PlanetGeneratorInterface
 
                 if ($mode != "nocluster" && $mode != GeneratorModeEnum::FORCED_ADJACENCY && $mode != GeneratorModeEnum::FORCED_RIM && $mode != GeneratorModeEnum::POLAR_SEEDING_NORTH && $mode != GeneratorModeEnum::POLAR_SEEDING_SOUTH) {
                     for ($k = 0; $k < count($to); $k++) {
-                        if ($fields[$w - 1][$h] == $to[$k]) {
+                        if ($w > 0 && $fields[$w - 1][$h] == $to[$k]) {
                             $bw += 1;
                         }
                         if ($fields[$w + 1][$h] == $to[$k]) {
                             $bw += 1;
                         }
-                        if ($fields[$w][$h - 1] == $to[$k]) {
+                        if ($h > 0 && $fields[$w][$h - 1] == $to[$k]) {
                             $bw += 1;
                         }
                         if ($fields[$w][$h + 1] == $to[$k]) {
                             $bw += 1;
                         }
-                        if ($fields[$w - 1][$h - 1] == $to[$k]) {
+                        if ($w > 0 && $h > 0 && $fields[$w - 1][$h - 1] == $to[$k]) {
                             $bw += 0.5;
                         }
                         if ($fields[$w + 1][$h + 1] == $to[$k]) {
                             $bw += 0.5;
                         }
-                        if ($fields[$w + 1][$h - 1] == $to[$k]) {
+                        if ($h > 0 && $fields[$w + 1][$h - 1] == $to[$k]) {
                             $bw += 0.5;
                         }
-                        if ($fields[$w - 1][$h + 1] == $to[$k]) {
+                        if ($w > 0 && $fields[$w - 1][$h + 1] == $to[$k]) {
                             $bw += 0.5;
                         }
                     }
@@ -511,7 +510,7 @@ final class PlanetGenerator implements PlanetGeneratorInterface
 
                 if ((($mode == GeneratorModeEnum::POLAR_SEEDING_NORTH) && ($h == 0)) || (($mode == GeneratorModeEnum::POLAR_SEEDING_SOUTH) && ($h == $height - 1))) {
                     for ($k = 0; $k < count($to); $k++) {
-                        if ($fields[$w - 1][$h] == $to[$k]) {
+                        if ($w > 0 && $fields[$w - 1][$h] == $to[$k]) {
                             $bw += 2;
                         }
                         if ($fields[$w + 1][$h] == $to[$k]) {
@@ -522,28 +521,28 @@ final class PlanetGenerator implements PlanetGeneratorInterface
 
                 if ($adjacent[0]) {
                     for ($k = 0; $k < count($adjacent); $k++) {
-                        if ($fields[$w - 1][$h] == $adjacent[$k]) {
+                        if ($w > 0 && $fields[$w - 1][$h] == $adjacent[$k]) {
                             $bw += 1;
                         }
                         if ($fields[$w + 1][$h] == $adjacent[$k]) {
                             $bw += 1;
                         }
-                        if ($fields[$w][$h - 1] == $adjacent[$k]) {
+                        if ($h > 0 && $fields[$w][$h - 1] == $adjacent[$k]) {
                             $bw += 1;
                         }
                         if ($fields[$w][$h + 1] == $adjacent[$k]) {
                             $bw += 1;
                         }
-                        if ($fields[$w - 1][$h - 1] == $adjacent[$k]) {
+                        if ($w > 0 && $h > 0 && $fields[$w - 1][$h - 1] == $adjacent[$k]) {
                             $bw += 0.5;
                         }
                         if ($fields[$w + 1][$h + 1] == $adjacent[$k]) {
                             $bw += 0.5;
                         }
-                        if ($fields[$w + 1][$h - 1] == $adjacent[$k]) {
+                        if ($h > 0 && $fields[$w + 1][$h - 1] == $adjacent[$k]) {
                             $bw += 0.5;
                         }
-                        if ($fields[$w - 1][$h + 1] == $adjacent[$k]) {
+                        if ($w > 0 && $fields[$w - 1][$h + 1] == $adjacent[$k]) {
                             $bw += 0.5;
                         }
                     }
@@ -552,28 +551,28 @@ final class PlanetGenerator implements PlanetGeneratorInterface
                 if ($no_adjacent[0]) {
                     for ($k = 0; $k < count($no_adjacent); $k++) {
                         $ad = 0;
-                        if ($fields[$w - 1][$h] == $no_adjacent[$k]) {
+                        if ($w > 0 && $fields[$w - 1][$h] == $no_adjacent[$k]) {
                             $ad += 1;
                         }
                         if ($fields[$w + 1][$h] == $no_adjacent[$k]) {
                             $ad += 1;
                         }
-                        if ($fields[$w][$h - 1] == $no_adjacent[$k]) {
+                        if ($h > 0 && $fields[$w][$h - 1] == $no_adjacent[$k]) {
                             $ad += 1;
                         }
                         if ($fields[$w][$h + 1] == $no_adjacent[$k]) {
                             $ad += 1;
                         }
-                        if ($fields[$w - 1][$h - 1] == $no_adjacent[$k]) {
+                        if ($w > 0 && $h > 0 && $fields[$w - 1][$h - 1] == $no_adjacent[$k]) {
                             $ad += 0.5;
                         }
                         if ($fields[$w + 1][$h + 1] == $no_adjacent[$k]) {
                             $ad += 0.5;
                         }
-                        if ($fields[$w + 1][$h - 1] == $no_adjacent[$k]) {
+                        if ($h > 0 && $fields[$w + 1][$h - 1] == $no_adjacent[$k]) {
                             $ad += 0.5;
                         }
-                        if ($fields[$w - 1][$h + 1] == $no_adjacent[$k]) {
+                        if ($w > 0 && $fields[$w - 1][$h + 1] == $no_adjacent[$k]) {
                             $ad += 0.5;
                         }
 
