@@ -22,6 +22,12 @@
     "mnsami/composer-custom-directory-installer": "^2",
     "phpstan/phpstan": "^1.9"
   },
+  "repositories": [
+    {
+      "type": "git",
+      "url": "https://github.com/st-universe/assets.git"
+    }
+  ],
   "config": {
     "allow-plugins": {
       "mnsami/composer-custom-directory-installer": true
