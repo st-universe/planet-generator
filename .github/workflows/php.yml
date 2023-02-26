@@ -12,7 +12,7 @@ jobs:
     strategy:
       matrix:
         os: ['ubuntu-latest']
-        php: ['7.4', '8.1', '8.2']
+        php: ['8.2']
     steps:
       - uses: actions/checkout@v2
 
@@ -29,7 +29,7 @@ jobs:
         with:
           timeout_minutes: 5
           max_attempts: 3
-          command: composer update --no-interaction --no-progress
+          command: composer install --no-interaction --no-progress
 
       - name: Run test suite
         run: composer run-script qa
