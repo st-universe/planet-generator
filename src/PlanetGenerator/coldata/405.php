@@ -9,7 +9,6 @@ $data[PlanetGenerator::COLGEN_DETAILS] = "Klasse O - Basisklasse Ozean";
 $bonusdata = array(
     PlanetGenerator::BONUS_WENERGY,
     PlanetGenerator::BONUS_WENERGY,
-    PlanetGenerator::BONUS_WATERFOOD,
     PlanetGenerator::BONUS_HABITAT
 );
 

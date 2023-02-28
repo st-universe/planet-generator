@@ -8,8 +8,6 @@ $data[PlanetGenerator::COLGEN_DETAILS] = "Klasse M-R - Ring";
 
 $bonusdata = array(
     PlanetGenerator::BONUS_AENERGY,
-    PlanetGenerator::BONUS_ANYFOOD,
-    PlanetGenerator::BONUS_ANYFOOD,
     PlanetGenerator::BONUS_HABITAT
 );
 

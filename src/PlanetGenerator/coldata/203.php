@@ -8,8 +8,6 @@ $data[PlanetGenerator::COLGEN_DETAILS] = "Klasse L - Basisklasse Wald";
 
 $bonusdata = array(
     PlanetGenerator::BONUS_AENERGY,
-    PlanetGenerator::BONUS_LANDFOOD,
-    PlanetGenerator::BONUS_LANDFOOD,
     PlanetGenerator::BONUS_HABITAT
 );
 

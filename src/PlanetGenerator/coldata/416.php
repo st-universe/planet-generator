@@ -10,8 +10,6 @@ $bonusdata = array(
     PlanetGenerator::BONUS_WENERGY,
     PlanetGenerator::BONUS_WENERGY,
     PlanetGenerator::BONUS_DEUTERIUM,
-    PlanetGenerator::BONUS_WATERFOOD,
-    PlanetGenerator::BONUS_WATERFOOD
 );
 
 $data[PlanetGenerator::CONFIG_COLGEN_SIZEW] = 7;
