@@ -41,6 +41,7 @@
     }
   },
   "scripts": {
+    "tests": "@php vendor/bin/phpunit tests",
     "stan": "phpstan",
     "qa": [
       "@composer tests",
