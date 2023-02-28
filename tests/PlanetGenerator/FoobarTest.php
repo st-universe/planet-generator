@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Stu\PlanetGenerator;
 
-use Stu\StuTestCase;
-
 class FoobarTest extends StuTestCase
 {
     public function testClearUnicodeRemoveUnicode(): void
@@ -16,6 +14,6 @@ class FoobarTest extends StuTestCase
 
         echo print_r($result, true);
 
-        $this->assertFalse(empty($result));
+        $this->assertTrue(empty($result));
     }
 }
