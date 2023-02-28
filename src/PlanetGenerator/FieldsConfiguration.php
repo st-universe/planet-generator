@@ -306,10 +306,10 @@ final class FieldsConfiguration implements FieldsConfigurationInterface
                 if (($mode == GeneratorModeEnum::TOP_LEFT) && (($h != 0) || $w != 0)) {
                     $bw = 0;
                 }
-                if (($mode == GeneratorModeEnum::RIGHT) && $w > 0 && ($this->isFieldUnEqual($w - 1, $h,  $adjacent[0]))) {
+                if (($mode == GeneratorModeEnum::RIGHT) && $w > 0 && ($this->getFieldArray()[$w - 1][$h] != $adjacent[0])) {
                     $bw = 0;
                 }
-                if (($mode == GeneratorModeEnum::BELOW) && $h > 0 && ($this->isFieldUnEqual($w, $h - 1, $adjacent[0]))) {
+                if (($mode == GeneratorModeEnum::BELOW) && $h > 0 && ($this->getFieldArray()[$w][$h - 1] != $adjacent[0])) {
                     $bw = 0;
                 }
                 if (($mode == GeneratorModeEnum::CRATER_SEEDING) && (($w == $this->getWidth() - 1) || ($h == $this->getHeight() - 1))) {
@@ -346,26 +346,5 @@ final class FieldsConfiguration implements FieldsConfigurationInterface
         }
 
         return $this->getFieldArray()[$w][$h] == $other;
-    }
-
-    private function isFieldUnEqual(int $w, int $h, int $other): bool
-    {
-        //check for boundaries
-        if ($w < 0 || $w >= $this->getWidth()) {
-            return true;
-        }
-        if ($h < 0 || $h >= $this->getHeight()) {
-            return true;
-        }
-
-        //check for existing value in field array
-        if (!array_key_exists($w, $this->getFieldArray())) {
-            return true;
-        }
-        if (!array_key_exists($h, $this->getFieldArray()[$w])) {
-            return true;
-        }
-
-        return $this->getFieldArray()[$w][$h] != $other;
     }
 }
