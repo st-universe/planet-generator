@@ -385,12 +385,6 @@ final class PlanetGenerator implements PlanetGeneratorInterface
         $res = [];
 
         $q = 0;
-        for ($i = 0; $i < $surfaceFieldsConfiguration->getHeight(); $i++) {
-            for ($j = 0; $j < $surfaceFieldsConfiguration->getWidth(); $j++) {
-                $res[$q] = $surfaceFieldsConfiguration->getFieldArray()[$j][$i];
-                $q++;
-            }
-        }
         if ($orbitFieldsConfiguration !== null) {
             for ($i = 0; $i < $orbitFieldsConfiguration->getHeight(); $i++) {
                 for ($j = 0; $j < $orbitFieldsConfiguration->getWidth(); $j++) {
@@ -399,6 +393,13 @@ final class PlanetGenerator implements PlanetGeneratorInterface
                 }
             }
         }
+        for ($i = 0; $i < $surfaceFieldsConfiguration->getHeight(); $i++) {
+            for ($j = 0; $j < $surfaceFieldsConfiguration->getWidth(); $j++) {
+                $res[$q] = $surfaceFieldsConfiguration->getFieldArray()[$j][$i];
+                $q++;
+            }
+        }
+
         if ($undergroundFieldsConfiguration !== null) {
             for ($i = 0; $i < $undergroundFieldsConfiguration->getHeight(); $i++) {
                 for ($j = 0; $j < $undergroundFieldsConfiguration->getWidth(); $j++) {

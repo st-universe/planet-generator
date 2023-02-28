@@ -33,7 +33,7 @@ final class FieldsConfiguration implements FieldsConfigurationInterface
     {
         for ($i = 0; $i < $this->getHeight(); $i++) {
             for ($j = 0; $j < $this->getWidth(); $j++) {
-                $this->fieldArray[$j][$i] = $baseFieldType;
+                $this->setFieldValue($j, $i, $baseFieldType);
             }
         }
     }
@@ -60,7 +60,7 @@ final class FieldsConfiguration implements FieldsConfigurationInterface
 
                     $k++;
 
-                    $this->getFieldArray()[$iw][$ih] = $phase[PlanetGenerator::COLGEN_TYPE] * 100 + $k;
+                    $this->setFieldValue($iw, $ih, $phase[PlanetGenerator::COLGEN_TYPE] * 100 + $k);
                 }
             }
         } else {
@@ -90,10 +90,15 @@ final class FieldsConfiguration implements FieldsConfigurationInterface
                     }
                 }
                 if ($t > 0) {
-                    $this->getFieldArray()[$field[PlanetGenerator::COLGEN_X]][$field[PlanetGenerator::COLGEN_Y]] = $ta[rand(0, $t - 1)];
+                    $this->setFieldValue($field[PlanetGenerator::COLGEN_X], $field[PlanetGenerator::COLGEN_Y], $ta[rand(0, $t - 1)]);
                 }
             }
         }
+    }
+
+    private function setFieldValue(int $w, int $h, int $fieldType): void
+    {
+        $this->fieldArray[$w][$h] = $fieldType;
     }
 
     private function weightedDraw(array $a, int $fragmentation = 0): array

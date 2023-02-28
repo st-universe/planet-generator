@@ -7,7 +7,7 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL & ~E_NOTICE);
 
-require_once __DIR__.'/../vendor/autoload.php';
+require_once __DIR__ . '/../vendor/autoload.php';
 
 /**
  * @todo fix several warnings
@@ -23,11 +23,11 @@ function buildSurface(
     int $planetTypeId
 ): void {
     $config = $planetGenerator->generateColony($planetTypeId, 2);
-    $sep = $config['surfaceWidth'];
+    $sep = $config->getSurfaceWidth();
 
     $surface = '';
 
-    foreach ($config['surfaceFields'] as $key => $field) {
+    foreach ($config->getFieldArray() as $key => $field) {
         $surface .= sprintf(
             '<img src="assets/generated/fields/%d.png" />',
             $field
@@ -37,7 +37,7 @@ function buildSurface(
         }
     }
 
-    echo sprintf('<div><h2>%d - %s</h2><div>%s</div></div>', $planetTypeId, $config['name'], $surface);
+    echo sprintf('<div><h2>%d - %s</h2><div>%s</div></div>', $planetTypeId, $config->getName(), $surface);
 }
 
 if ($planetTypeId === null) {
