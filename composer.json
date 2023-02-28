@@ -43,6 +43,7 @@
   "scripts": {
     "stan": "phpstan",
     "qa": [
+      "@composer tests",
       "@composer stan"
     ],
     "gen:assets": [
