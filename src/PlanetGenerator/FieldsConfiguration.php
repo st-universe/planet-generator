@@ -4,13 +4,12 @@ namespace Stu\PlanetGenerator;
 
 final class FieldsConfiguration implements FieldsConfigurationInterface
 {
-    private array $fieldArray;
+    private array $fieldArray = [];
     private int $height;
     private int $width;
 
-    public function __construct(array $fieldArray, int $height, int $width)
+    public function __construct(int $height, int $width)
     {
-        $this->fieldArray = $fieldArray;
         $this->height = $height;
         $this->width = $width;
     }
@@ -30,6 +29,15 @@ final class FieldsConfiguration implements FieldsConfigurationInterface
         return $this->fieldArray;
     }
 
+    public function initBaseFields(int $baseFieldType): void
+    {
+        for ($i = 0; $i < $this->getHeight(); $i++) {
+            for ($j = 0; $j < $this->getWidth(); $j++) {
+                $this->fieldArray[$j][$i] = $baseFieldType;
+            }
+        }
+    }
+
     /**
      * @param array{
      *  mode: string,
@@ -47,8 +55,8 @@ final class FieldsConfiguration implements FieldsConfigurationInterface
     {
         if ($phase[PlanetGenerator::COLGEN_MODE] == "fullsurface") {
             $k = 0;
-            for ($ih = 0; $ih < $this->height; $ih++) {
-                for ($iw = 0; $iw < $this->width; $iw++) {
+            for ($ih = 0; $ih < $this->getHeight(); $ih++) {
+                for ($iw = 0; $iw < $this->getWidth(); $iw++) {
 
                     $k++;
 
@@ -70,7 +78,7 @@ final class FieldsConfiguration implements FieldsConfigurationInterface
                 }
 
                 $field = $this->weightedDraw($arr, $phase[PlanetGenerator::COLGEN_FRAGMENTATION]);
-                $ftype = $this->fieldArray[$field[PlanetGenerator::COLGEN_X]][$field[PlanetGenerator::COLGEN_Y]];
+                $ftype = $this->getFieldArray()[$field[PlanetGenerator::COLGEN_X]][$field[PlanetGenerator::COLGEN_Y]];
 
                 $t = 0;
                 unset($ta);
@@ -82,7 +90,7 @@ final class FieldsConfiguration implements FieldsConfigurationInterface
                     }
                 }
                 if ($t > 0) {
-                    $this->fieldArray[$field[PlanetGenerator::COLGEN_X]][$field[PlanetGenerator::COLGEN_Y]] = $ta[rand(0, $t - 1)];
+                    $this->getFieldArray()[$field[PlanetGenerator::COLGEN_X]][$field[PlanetGenerator::COLGEN_Y]] = $ta[rand(0, $t - 1)];
                 }
             }
         }
@@ -122,20 +130,18 @@ final class FieldsConfiguration implements FieldsConfigurationInterface
     ): ?array {
         $res = null;
 
-        $width = count($this->fieldArray);
-        $height = count($this->fieldArray[0] ?? []);
         $c = 0;
-        for ($h = 0; $h < $height; $h++) {
-            for ($w = 0; $w < $width; $w++) {
+        for ($h = 0; $h < $this->getHeight(); $h++) {
+            for ($w = 0; $w < $this->getWidth(); $w++) {
 
                 //check if field is FROM
-                if (!in_array($this->fieldArray[$w][$h], $from)) {
+                if (!in_array($this->getFieldArray()[$w][$h], $from)) {
                     continue;
                 }
 
                 //and now?
                 $bw = 1;
-                if ((($mode == GeneratorModeEnum::POLAR) || ($mode == GeneratorModeEnum::STRICT_POLAR)) && ($h == 0 || $h == $height - 1)) {
+                if ((($mode == GeneratorModeEnum::POLAR) || ($mode == GeneratorModeEnum::STRICT_POLAR)) && ($h == 0 || $h == $this->getHeight() - 1)) {
                     $bw += 1;
                 }
                 if (($mode == GeneratorModeEnum::TOP_LEFT) && ($h == 0) && ($w == 0)) {
@@ -144,11 +150,11 @@ final class FieldsConfiguration implements FieldsConfigurationInterface
                 if (($mode == GeneratorModeEnum::POLAR_SEEDING_NORTH) && ($h == 0)) {
                     $bw += 2;
                 }
-                if (($mode == GeneratorModeEnum::POLAR_SEEDING_SOUTH) && ($h == $height - 1)) {
+                if (($mode == GeneratorModeEnum::POLAR_SEEDING_SOUTH) && ($h == $this->getHeight() - 1)) {
                     $bw += 2;
                 }
 
-                if (($mode == GeneratorModeEnum::EQUATORIAL) && (($h == 2 && $height == 5) || (($h == 2 || $h == 3) && $height == 6))) {
+                if (($mode == GeneratorModeEnum::EQUATORIAL) && (($h == 2 && $this->getHeight() == 5) || (($h == 2 || $h == 3) && $this->getHeight() == 6))) {
                     $bw += 1;
                 }
 
@@ -181,7 +187,7 @@ final class FieldsConfiguration implements FieldsConfigurationInterface
                     }
                 }
 
-                if ((($mode == GeneratorModeEnum::POLAR_SEEDING_NORTH) && ($h == 0)) || (($mode == GeneratorModeEnum::POLAR_SEEDING_SOUTH) && ($h == $height - 1))) {
+                if ((($mode == GeneratorModeEnum::POLAR_SEEDING_NORTH) && ($h == 0)) || (($mode == GeneratorModeEnum::POLAR_SEEDING_SOUTH) && ($h == $this->getHeight() - 1))) {
                     for ($k = 0; $k < count($to); $k++) {
                         if ($this->isFieldEqual($w - 1, $h, $to[$k])) {
                             $bw += 2;
@@ -262,22 +268,22 @@ final class FieldsConfiguration implements FieldsConfigurationInterface
                     $bw = 0;
                 }
 
-                if (($mode == GeneratorModeEnum::POLAR) && ($h > 1) && ($h < $height - 2)) {
+                if (($mode == GeneratorModeEnum::POLAR) && ($h > 1) && ($h < $this->getHeight() - 2)) {
                     $bw = 0;
                 }
-                if (($mode == GeneratorModeEnum::STRICT_POLAR) && ($h > 0) && ($h < $height - 1)) {
+                if (($mode == GeneratorModeEnum::STRICT_POLAR) && ($h > 0) && ($h < $this->getHeight() - 1)) {
                     $bw = 0;
                 }
                 if ($mode == GeneratorModeEnum::POLAR_SEEDING_NORTH && ($h > 1)) {
                     $bw = 0;
                 }
-                if ($mode == GeneratorModeEnum::POLAR_SEEDING_SOUTH && ($h < $height - 2)) {
+                if ($mode == GeneratorModeEnum::POLAR_SEEDING_SOUTH && ($h < $this->getHeight() - 2)) {
                     $bw = 0;
                 }
-                if (($mode == GeneratorModeEnum::EQUATORIAL) && (($h < 2) || ($h > 3)) && ($height == 6)) {
+                if (($mode == GeneratorModeEnum::EQUATORIAL) && (($h < 2) || ($h > 3)) && ($this->getHeight() == 6)) {
                     $bw = 0;
                 }
-                if (($mode == GeneratorModeEnum::EQUATORIAL) && (($h < 2) || ($h > 3)) && ($height == 5)) {
+                if (($mode == GeneratorModeEnum::EQUATORIAL) && (($h < 2) || ($h > 3)) && ($this->getHeight() == 5)) {
                     $bw = 0;
                 }
 
@@ -295,13 +301,13 @@ final class FieldsConfiguration implements FieldsConfigurationInterface
                 if (($mode == GeneratorModeEnum::TOP_LEFT) && (($h != 0) || $w != 0)) {
                     $bw = 0;
                 }
-                if (($mode == GeneratorModeEnum::RIGHT) && $w > 0 && ($this->fieldArray[$w - 1][$h] != $adjacent[0])) {
+                if (($mode == GeneratorModeEnum::RIGHT) && $w > 0 && ($this->isFieldUnEqual($w - 1, $h,  $adjacent[0]))) {
                     $bw = 0;
                 }
-                if (($mode == GeneratorModeEnum::BELOW) && $h > 0 && ($this->fieldArray[$w][$h - 1] != $adjacent[0])) {
+                if (($mode == GeneratorModeEnum::BELOW) && $h > 0 && ($this->isFieldUnEqual($w, $h - 1, $adjacent[0]))) {
                     $bw = 0;
                 }
-                if (($mode == GeneratorModeEnum::CRATER_SEEDING) && (($w == $width - 1) || ($h == $height - 1))) {
+                if (($mode == GeneratorModeEnum::CRATER_SEEDING) && (($w == $this->getWidth() - 1) || ($h == $this->getHeight() - 1))) {
                     $bw = 0;
                 }
 
@@ -335,5 +341,26 @@ final class FieldsConfiguration implements FieldsConfigurationInterface
         }
 
         return $this->getFieldArray()[$w][$h] == $other;
+    }
+
+    private function isFieldUnEqual(int $w, int $h, int $other): bool
+    {
+        //check for boundaries
+        if ($w < 0 || $w >= $this->getWidth()) {
+            return true;
+        }
+        if ($h < 0 || $h >= $this->getHeight()) {
+            return true;
+        }
+
+        //check for existing value in field array
+        if (!array_key_exists($w, $this->getFieldArray())) {
+            return true;
+        }
+        if (!array_key_exists($h, $this->getFieldArray()[$w])) {
+            return true;
+        }
+
+        return $this->getFieldArray()[$w][$h] != $other;
     }
 }

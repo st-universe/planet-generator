@@ -2,6 +2,7 @@
 
 namespace Stu\PlanetGenerator;
 
+use Generator;
 use Stu\PlanetGenerator\Exception\PlanetGeneratorException;
 
 interface PlanetGeneratorInterface
@@ -13,12 +14,15 @@ interface PlanetGeneratorInterface
     public function loadColonyClassConfig(int $planetTypeId): array;
 
     /**
-     * @return array{name: string, surfaceWidth: int, surfaceFields: array<int, int>}
-     *
+     * @return Generator<int>
+     */
+    public function getSupportedPlanetTypes(): Generator;
+
+    /**
      * @throws PlanetGeneratorException
      */
     public function generateColony(
         int $planetTypeId,
         int $bonusFieldAmount
-    ): array;
+    ): GeneratedColonyConfigurationInterface;
 }

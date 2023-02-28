@@ -14,8 +14,8 @@ use Stu\PlanetGenerator\Exception\PlanetGeneratorFileMissingException;
  *    0: TPhase,
  *    1: TPhase,
  *    2: TPhase,
- *    3: int,
- *    4: int
+ *    3: bool,
+ *    4: bool
  *  },
  *  sizew: int,
  *  sizeh: int,
@@ -47,8 +47,8 @@ use Stu\PlanetGenerator\Exception\PlanetGeneratorFileMissingException;
  *  3: array<int, TPhase>,
  *  4: array<int, TPhase>,
  *  5: array<int, TPhase>,
- *  6: int,
- *  7: int
+ *  6: bool,
+ *  7: bool
  * }
  */
 final class PlanetGenerator implements PlanetGeneratorInterface
@@ -118,7 +118,7 @@ final class PlanetGenerator implements PlanetGeneratorInterface
     public function generateColony(
         int $planetTypeId,
         int $bonusFieldAmount
-    ): array {
+    ): GeneratedColonyConfigurationInterface {
         $config = $this->loadColonyClassConfig($planetTypeId);
         [$ophase, $phase, $uphase, $hasGround, $hasOrbit] = $config[0];
 
@@ -145,10 +145,9 @@ final class PlanetGenerator implements PlanetGeneratorInterface
             }
         }
 
-        $bonusPhaseCount = 0;
 
         // Bonus Phases
-
+        $bonusPhaseCount = 0;
         $bphase = [];
 
         for ($i = 0; $i < $phaseSuperCount; $i++) {
@@ -169,24 +168,47 @@ final class PlanetGenerator implements PlanetGeneratorInterface
             self::PHASE_BONUS => $bphase,
         ];
 
-        $surfaceFieldsConfiguration = $this->doPhases($config, $phases, self::PHASE_COLONY);
-        $orbitFieldsConfiguration = $hasOrbit ? $this->doPhases($config, $phases, self::PHASE_ORBIT) : null;
-        $undergroundFieldsConfiguration = $hasGround ?  $this->doPhases($config, $phases, self::PHASE_UNDERGROUND) : null;
+        $surfaceFieldsConfiguration = $this->doPhases(
+            $config[self::CONFIG_COLGEN_SIZEW],
+            $config[self::CONFIG_COLGEN_SIZEH],
+            $phases,
+            $config[self::PHASE_COLONY],
+            self::PHASE_COLONY
+        );
+        $orbitFieldsConfiguration = $hasOrbit ? $this->doPhases(
+            $config[self::CONFIG_COLGEN_SIZEW],
+            2,
+            $phases,
+            $config[self::PHASE_ORBIT],
+            self::PHASE_ORBIT
+        ) : null;
+        $undergroundFieldsConfiguration = $hasGround ? $this->doPhases(
+            $config[self::CONFIG_COLGEN_SIZEW],
+            2,
+            $phases,
+            $config[self::PHASE_UNDERGROUND],
+            self::PHASE_UNDERGROUND
+        ) : null;
 
-        return [
-            'name' => $config[self::CONFIG_NAME],
-            'surfaceWidth' => $config[self::CONFIG_COLGEN_SIZEW],
-            'surfaceFields' => $this->combine($surfaceFieldsConfiguration, $orbitFieldsConfiguration, $undergroundFieldsConfiguration),
-        ];
+        return new GeneratedColonyConfiguration(
+            $config[self::CONFIG_NAME],
+            $config[self::CONFIG_COLGEN_SIZEW],
+            $config[self::CONFIG_COLGEN_SIZEH],
+            $hasOrbit,
+            $hasGround,
+            $this->combine($surfaceFieldsConfiguration, $orbitFieldsConfiguration, $undergroundFieldsConfiguration)
+        );
     }
 
     private function doPhases(
-        array $config,
+        int $width,
+        int $height,
         array $phases,
+        int $baseFieldType,
         int $fieldTypeCategory
     ): FieldsConfigurationInterface {
 
-        $fieldsConfiguration = $this->initFieldsConfiguration($config, $fieldTypeCategory);
+        $fieldsConfiguration = $this->initFieldsConfiguration($width, $height, $baseFieldType);
 
         if (!empty($phases[$fieldTypeCategory])) {
             $phaseCounts = count($phases[$fieldTypeCategory]);
@@ -220,29 +242,12 @@ final class PlanetGenerator implements PlanetGeneratorInterface
         }
     }
 
-    private function initBaseFields(int $height, int $width, int $baseFieldType): array
+    private function initFieldsConfiguration(int $width, int $height, int $baseFieldType): FieldsConfigurationInterface
     {
-        $baseFieldArray = [];
+        $fieldsConfiguration = new FieldsConfiguration($height, $width);
+        $fieldsConfiguration->initBaseFields($baseFieldType);
 
-        for ($i = 0; $i < $height; $i++) {
-            for ($j = 0; $j < $width; $j++) {
-                $baseFieldArray[$j][$i] = $baseFieldType;
-            }
-        }
-
-        return $baseFieldArray;
-    }
-
-    private function initFieldsConfiguration(array $config, int $fieldTypeCategory): FieldsConfigurationInterface
-    {
-        $h = $config[self::CONFIG_COLGEN_SIZEH];
-        $w = $config[self::CONFIG_COLGEN_SIZEW];
-
-        return new FieldsConfiguration(
-            $this->initBaseFields($h, $w, $config[$fieldTypeCategory]),
-            $h,
-            $w
-        );
+        return $fieldsConfiguration;
     }
 
     /**
@@ -402,8 +407,6 @@ final class PlanetGenerator implements PlanetGeneratorInterface
                 }
             }
         }
-
-        echo 'combine';
 
         return $res;
     }

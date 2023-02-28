@@ -6,11 +6,6 @@ parameters:
 			path: src/PlanetGenerator/FieldsConfiguration.php
 
 		-
-			message: "#^Method Stu\\\\PlanetGenerator\\\\FieldsConfiguration\\:\\:__construct\\(\\) has parameter \\$fieldArray with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/PlanetGenerator/FieldsConfiguration.php
-
-		-
 			message: "#^Method Stu\\\\PlanetGenerator\\\\FieldsConfiguration\\:\\:getFieldArray\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/PlanetGenerator/FieldsConfiguration.php
@@ -66,17 +61,32 @@ parameters:
 			path: src/PlanetGenerator/FieldsConfigurationInterface.php
 
 		-
+			message: "#^Method Stu\\\\PlanetGenerator\\\\GeneratedColonyConfiguration\\:\\:__construct\\(\\) has parameter \\$fieldArray with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/PlanetGenerator/GeneratedColonyConfiguration.php
+
+		-
+			message: "#^Method Stu\\\\PlanetGenerator\\\\GeneratedColonyConfiguration\\:\\:getFieldArray\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/PlanetGenerator/GeneratedColonyConfiguration.php
+
+		-
+			message: "#^Property Stu\\\\PlanetGenerator\\\\GeneratedColonyConfiguration\\:\\:\\$fieldArray type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/PlanetGenerator/GeneratedColonyConfiguration.php
+
+		-
+			message: "#^Method Stu\\\\PlanetGenerator\\\\GeneratedColonyConfigurationInterface\\:\\:getFieldArray\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/PlanetGenerator/GeneratedColonyConfigurationInterface.php
+
+		-
 			message: "#^Method Stu\\\\PlanetGenerator\\\\PlanetGenerator\\:\\:createBonusPhase\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/PlanetGenerator/PlanetGenerator.php
 
 		-
 			message: "#^Method Stu\\\\PlanetGenerator\\\\PlanetGenerator\\:\\:createBonusPhase\\(\\) has parameter \\$btype with no type specified\\.$#"
-			count: 1
-			path: src/PlanetGenerator/PlanetGenerator.php
-
-		-
-			message: "#^Method Stu\\\\PlanetGenerator\\\\PlanetGenerator\\:\\:doPhases\\(\\) has parameter \\$config with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/PlanetGenerator/PlanetGenerator.php
 
@@ -91,17 +101,7 @@ parameters:
 			path: src/PlanetGenerator/PlanetGenerator.php
 
 		-
-			message: "#^Method Stu\\\\PlanetGenerator\\\\PlanetGenerator\\:\\:initBaseFields\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/PlanetGenerator/PlanetGenerator.php
-
-		-
-			message: "#^Method Stu\\\\PlanetGenerator\\\\PlanetGenerator\\:\\:initFieldsConfiguration\\(\\) has parameter \\$config with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/PlanetGenerator/PlanetGenerator.php
-
-		-
-			message: "#^Method Stu\\\\PlanetGenerator\\\\PlanetGenerator\\:\\:loadColonyClassConfig\\(\\) should return TConfig of array\\{0\\: array\\{TPhase of array\\{mode\\: string, description\\: string, num\\: int, from\\: array\\<int, int\\>, to\\: array\\<int, int\\>, adjacent\\: array\\<int\\>, noadjacent\\: int, noadjacentlimit\\: int, \\.\\.\\.\\}, TPhase of array\\{mode\\: string, description\\: string, num\\: int, from\\: array\\<int, int\\>, to\\: array\\<int, int\\>, adjacent\\: array\\<int\\>, noadjacent\\: int, noadjacentlimit\\: int, \\.\\.\\.\\}, TPhase of array\\{mode\\: string, description\\: string, num\\: int, from\\: array\\<int, int\\>, to\\: array\\<int, int\\>, adjacent\\: array\\<int\\>, noadjacent\\: int, noadjacentlimit\\: int, \\.\\.\\.\\}, int, int\\}, sizew\\: int, sizeh\\: int, name\\: string, 1\\: int, 2\\: int, 3\\: int\\} but returns array\\{0\\: array\\{array\\<int, TPhase of array\\{mode\\: string, description\\: string, num\\: int, from\\: array\\<int, int\\>, to\\: array\\<int, int\\>, adjacent\\: array\\<int\\>, noadjacent\\: int, noadjacentlimit\\: int, \\.\\.\\.\\}\\>, array\\<int, TPhase of array\\{mode\\: string, description\\: string, num\\: int, from\\: array\\<int, int\\>, to\\: array\\<int, int\\>, adjacent\\: array\\<int\\>, noadjacent\\: int, noadjacentlimit\\: int, \\.\\.\\.\\}\\>, array\\<int, TPhase of array\\{mode\\: string, description\\: string, num\\: int, from\\: array\\<int, int\\>, to\\: array\\<int, int\\>, adjacent\\: array\\<int\\>, noadjacent\\: int, noadjacentlimit\\: int, \\.\\.\\.\\}\\>, int, int\\}, sizew\\: int, sizeh\\: int, 1\\: int, 2\\: int, 3\\: int, name\\: string\\}\\.$#"
+			message: "#^Method Stu\\\\PlanetGenerator\\\\PlanetGenerator\\:\\:loadColonyClassConfig\\(\\) should return TConfig of array\\{0\\: array\\{TPhase of array\\{mode\\: string, description\\: string, num\\: int, from\\: array\\<int, int\\>, to\\: array\\<int, int\\>, adjacent\\: array\\<int\\>, noadjacent\\: int, noadjacentlimit\\: int, \\.\\.\\.\\}, TPhase of array\\{mode\\: string, description\\: string, num\\: int, from\\: array\\<int, int\\>, to\\: array\\<int, int\\>, adjacent\\: array\\<int\\>, noadjacent\\: int, noadjacentlimit\\: int, \\.\\.\\.\\}, TPhase of array\\{mode\\: string, description\\: string, num\\: int, from\\: array\\<int, int\\>, to\\: array\\<int, int\\>, adjacent\\: array\\<int\\>, noadjacent\\: int, noadjacentlimit\\: int, \\.\\.\\.\\}, bool, bool\\}, sizew\\: int, sizeh\\: int, name\\: string, 1\\: int, 2\\: int, 3\\: int\\} but returns array\\{0\\: array\\{array\\<int, TPhase of array\\{mode\\: string, description\\: string, num\\: int, from\\: array\\<int, int\\>, to\\: array\\<int, int\\>, adjacent\\: array\\<int\\>, noadjacent\\: int, noadjacentlimit\\: int, \\.\\.\\.\\}\\>, array\\<int, TPhase of array\\{mode\\: string, description\\: string, num\\: int, from\\: array\\<int, int\\>, to\\: array\\<int, int\\>, adjacent\\: array\\<int\\>, noadjacent\\: int, noadjacentlimit\\: int, \\.\\.\\.\\}\\>, array\\<int, TPhase of array\\{mode\\: string, description\\: string, num\\: int, from\\: array\\<int, int\\>, to\\: array\\<int, int\\>, adjacent\\: array\\<int\\>, noadjacent\\: int, noadjacentlimit\\: int, \\.\\.\\.\\}\\>, bool, bool\\}, sizew\\: int, sizeh\\: int, 1\\: int, 2\\: int, 3\\: int, name\\: string\\}\\.$#"
 			count: 1
 			path: src/PlanetGenerator/PlanetGenerator.php
 
