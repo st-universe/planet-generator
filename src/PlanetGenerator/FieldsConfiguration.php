@@ -163,7 +163,13 @@ final class FieldsConfiguration implements FieldsConfigurationInterface
                     $bw += 1;
                 }
 
-                if ($mode != "nocluster" && $mode != GeneratorModeEnum::FORCED_ADJACENCY && $mode != GeneratorModeEnum::FORCED_RIM && $mode != GeneratorModeEnum::POLAR_SEEDING_NORTH && $mode != GeneratorModeEnum::POLAR_SEEDING_SOUTH) {
+                if (
+                    $mode != "nocluster"
+                    && $mode != GeneratorModeEnum::FORCED_ADJACENCY
+                    && $mode != GeneratorModeEnum::FORCED_RIM
+                    && $mode != GeneratorModeEnum::POLAR_SEEDING_NORTH
+                    && $mode != GeneratorModeEnum::POLAR_SEEDING_SOUTH
+                ) {
                     for ($k = 0; $k < count($to); $k++) {
                         if ($this->isFieldEqual($w - 1, $h, $to[$k])) {
                             $bw += 1;
@@ -306,10 +312,10 @@ final class FieldsConfiguration implements FieldsConfigurationInterface
                 if (($mode == GeneratorModeEnum::TOP_LEFT) && (($h != 0) || $w != 0)) {
                     $bw = 0;
                 }
-                if (($mode == GeneratorModeEnum::RIGHT) && $w > 0 && ($this->getFieldArray()[$w - 1][$h] != $adjacent[0])) {
+                if (($mode == GeneratorModeEnum::RIGHT) && ($this->isFieldUnequal($w - 1, $h, $adjacent[0]))) {
                     $bw = 0;
                 }
-                if (($mode == GeneratorModeEnum::BELOW) && $h > 0 && ($this->getFieldArray()[$w][$h - 1] != $adjacent[0])) {
+                if (($mode == GeneratorModeEnum::BELOW) && ($this->isFieldUnequal($w, $h - 1, $adjacent[0]))) {
                     $bw = 0;
                 }
                 if (($mode == GeneratorModeEnum::CRATER_SEEDING) && (($w == $this->getWidth() - 1) || ($h == $this->getHeight() - 1))) {
@@ -346,5 +352,26 @@ final class FieldsConfiguration implements FieldsConfigurationInterface
         }
 
         return $this->getFieldArray()[$w][$h] == $other;
+    }
+
+    private function isFieldUnequal(int $w, int $h, int $other): bool
+    {
+        //check for boundaries
+        if ($w < 0 || $w >= $this->getWidth()) {
+            return true;
+        }
+        if ($h < 0 || $h >= $this->getHeight()) {
+            return true;
+        }
+
+        //check for existing value in field array
+        if (!array_key_exists($w, $this->getFieldArray())) {
+            return true;
+        }
+        if (!array_key_exists($h, $this->getFieldArray()[$w])) {
+            return true;
+        }
+
+        return $this->getFieldArray()[$w][$h] != $other;
     }
 }
