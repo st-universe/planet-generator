@@ -80,6 +80,7 @@ final class PlanetGenerator implements PlanetGeneratorInterface
     public const BONUS_SENERGY = 31;
     public const BONUS_WENERGY = 32;
     public const BONUS_SUPER = 99;
+    public const BONUS_QUALITY = 40;
 
     //phases enum
     private const PHASE_COLONY = 1;
@@ -132,33 +133,40 @@ final class PlanetGenerator implements PlanetGeneratorInterface
         $phasesResourceCount = 0;
         $phaseEnergyCount = 0;
         $phaseHabitatCount = 0;
+        $phaseQualityCount = 0;
 
         // Funktionen für die Bonus-Generierung
         $bonusGenerators = [
             function () use (&$phaseSuperCount, &$bftaken, $bonusFieldAmount) {
-                if (($bftaken < $bonusFieldAmount) && (rand(1, 100) <= 15)) {
+                if (($bftaken < $bonusFieldAmount) && (rand(1, 100) <= 75)) {
                     $phaseSuperCount += 1;
                     $bftaken += 1;
                 }
             },
             function () use (&$phasesResourceCount, &$bftaken, $bonusFieldAmount) {
-                if (($bftaken < $bonusFieldAmount) && (rand(1, 100) <= 80)) {
+                if (($bftaken < $bonusFieldAmount) && (rand(1, 100) <= 75)) {
                     $phasesResourceCount += 1;
                     $bftaken += 1;
                 }
             },
             function () use (&$phaseEnergyCount, &$bftaken, $bonusFieldAmount) {
-                if (($bftaken < $bonusFieldAmount) && (rand(1, 100) <= 30)) {
+                if (($bftaken < $bonusFieldAmount) && (rand(1, 100) <= 75)) {
                     $phaseEnergyCount += 1;
                     $bftaken += 1;
                 }
             },
             function () use (&$phaseHabitatCount, &$bftaken, $bonusFieldAmount) {
-                if (($bftaken < $bonusFieldAmount) && (rand(1, 100) <= 30)) {
+                if (($bftaken < $bonusFieldAmount) && (rand(1, 100) <= 75)) {
                     $phaseHabitatCount += 1;
                     $bftaken += 1;
                 }
-            }
+            },
+            function () use (&$phaseQualityCount, &$bftaken, $bonusFieldAmount) {
+                if (($bftaken < $bonusFieldAmount) && (rand(1, 100) <= 75)) {
+                    $phaseQualityCount += 1;
+                    $bftaken += 1;
+                }
+            },
         ];
 
         shuffle($bonusGenerators);
@@ -167,7 +175,7 @@ final class PlanetGenerator implements PlanetGeneratorInterface
         }
 
         if (($phaseSuperCount == 0) && ($config[self::CONFIG_COLGEN_SIZEW] > 7)) {
-            if (($bftaken < $bonusFieldAmount) && (rand(1, 100) <= 10)) {
+            if (($bftaken < $bonusFieldAmount) && (rand(1, 100) <= 40)) {
                 $phasesResourceCount += 1;
             }
         }
@@ -193,6 +201,11 @@ final class PlanetGenerator implements PlanetGeneratorInterface
 
         for ($i = 0; $i < $phaseHabitatCount; $i++) {
             $bphase[$bonusPhaseCount] = $this->createBonusPhase(self::BONUS_HABITAT);
+            $bonusPhaseCount++;
+        }
+
+        for ($i = 0; $i < $phaseQualityCount; $i++) {
+            $bphase[$bonusPhaseCount] = $this->createBonusPhase(self::BONUS_QUALITY);
             $bonusPhaseCount++;
         }
 
@@ -324,66 +337,83 @@ final class PlanetGenerator implements PlanetGeneratorInterface
 
     private function getBonusFieldTransformations(int $btype): array
     {
-        $res = array();
-        $res[self::COLGEN_FROM] = [];
-        $res[self::COLGEN_TO] = [];
+        $res = [
+            self::COLGEN_FROM => [],
+            self::COLGEN_TO => [],
+        ];
+
+        $habitatFields = [
+            101 => "03", 111 => "03", 112 => "03", 601 => "03", 601 => "04", 602 => "03",
+            611 => "03", 611 => "04", 713 => "04", 715 => "04", 725 => "04"
+        ];
+
+        $qualityFields = [
+            101 => "01", 111 => "01", 112 => "01", 121 => "01", 122 => "02",
+            201 => "02", 211 => "02", 212 => "02", 221 => "02", 222 => "02",
+            601 => "01", 611 => "01"
+        ];
+
+        $solarFields = [
+            401 => "31", 402 => "31", 403 => "31", 404 => "31", 713 => "31"
+        ];
+
+        $stromungFields = [
+            201 => "32", 211 => "32", 212 => "32", 221 => "32", 222 => "32"
+        ];
+
+        $oreFields = [
+            701 => "12", 702 => "12", 703 => "12", 704 => "12", 705 => "12", 706 => "12"
+        ];
+
+        $deuteriumFields = [
+            201 => "11", 210 => "11", 211 => "11", 212 => "11", 221 => "11", 222 => "11",
+            231 => "11", 232 => "11", 501 => "11", 511 => "11"
+        ];
+
+        $superFields = [
+            701 => "21", 702 => "21", 703 => "21", 704 => "21", 705 => "21", 706 => "21"
+        ];
 
         if ($btype == self::BONUS_HABITAT) {
-            $res = $this->shadd($res, 101, "03");
-            $res = $this->shadd($res, 111, "03");
-            $res = $this->shadd($res, 112, "03");
-            $res = $this->shadd($res, 601, "03");
-            $res = $this->shadd($res, 601, "04");
-            $res = $this->shadd($res, 602, "03");
-            $res = $this->shadd($res, 611, "03");
-            $res = $this->shadd($res, 611, "04");
-            $res = $this->shadd($res, 713, "04");
-            $res = $this->shadd($res, 715, "04");
-            $res = $this->shadd($res, 725, "04");
+            $selectedField = array_rand($habitatFields);
+            $suffix = $habitatFields[$selectedField];
+            $res = $this->shadd($res, $selectedField, $suffix);
         }
 
-        // solar
+        if ($btype == self::BONUS_QUALITY) {
+            $selectedField = array_rand($qualityFields);
+            $suffix = $qualityFields[$selectedField];
+            $res = $this->shadd($res, $selectedField, $suffix);
+        }
+
         if (($btype == self::BONUS_SENERGY) || ($btype == self::BONUS_AENERGY)) {
-            $res = $this->shadd($res, 401, "31");
-            $res = $this->shadd($res, 402, "31");
-            $res = $this->shadd($res, 403, "31");
-            $res = $this->shadd($res, 404, "31");
-            $res = $this->shadd($res, 713, "31");
+            $selectedField = array_rand($solarFields);
+            $suffix = $solarFields[$selectedField];
+            $res = $this->shadd($res, $selectedField, $suffix);
         }
 
-        // strömung
         if (($btype == self::BONUS_WENERGY) || ($btype == self::BONUS_AENERGY)) {
-            $res = $this->shadd($res, 201, "32");
-            $res = $this->shadd($res, 221, "32");
+            $selectedField = array_rand($stromungFields);
+            $suffix = $stromungFields[$selectedField];
+            $res = $this->shadd($res, $selectedField, $suffix);
         }
 
         if (($btype == self::BONUS_ORE) || ($btype == self::BONUS_ANYRESOURCE)) {
-            $res = $this->shadd($res, 701, "12");
-            $res = $this->shadd($res, 702, "12");
-            $res = $this->shadd($res, 703, "12");
-            $res = $this->shadd($res, 704, "12");
-            $res = $this->shadd($res, 705, "12");
-            $res = $this->shadd($res, 706, "12");
+            $selectedField = array_rand($oreFields);
+            $suffix = $oreFields[$selectedField];
+            $res = $this->shadd($res, $selectedField, $suffix);
         }
 
         if (($btype == self::BONUS_DEUTERIUM) || ($btype == self::BONUS_ANYRESOURCE)) {
-            $res = $this->shadd($res, 201, "11");
-            $res = $this->shadd($res, 210, "11");
-            $res = $this->shadd($res, 211, "11");
-            $res = $this->shadd($res, 221, "11");
-            $res = $this->shadd($res, 501, "11");
-            $res = $this->shadd($res, 511, "11");
+            $selectedField = array_rand($deuteriumFields);
+            $suffix = $deuteriumFields[$selectedField];
+            $res = $this->shadd($res, $selectedField, $suffix);
         }
 
         if ($btype == self::BONUS_SUPER) {
-
-            // dili
-            $res = $this->shadd($res, 701, "21");
-            $res = $this->shadd($res, 702, "21");
-            $res = $this->shadd($res, 703, "21");
-            $res = $this->shadd($res, 704, "21");
-            $res = $this->shadd($res, 705, "21");
-            $res = $this->shadd($res, 706, "21");
+            $selectedField = array_rand($superFields);
+            $suffix = $superFields[$selectedField];
+            $res = $this->shadd($res, $selectedField, $suffix);
         }
 
         return $res;
