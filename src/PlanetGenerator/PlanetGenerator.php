@@ -122,7 +122,7 @@ final class PlanetGenerator implements PlanetGeneratorInterface
         $config = $this->loadColonyClassConfig($planetTypeId);
         [$ophase, $phase, $uphase, $hasGround, $hasOrbit] = $config[0];
 
-        // start bonus
+        // Startbonus
         if ($config[self::CONFIG_COLGEN_SIZEW] != 10) {
             $bonusFieldAmount = $bonusFieldAmount - 1;
         }
@@ -130,23 +130,49 @@ final class PlanetGenerator implements PlanetGeneratorInterface
         $bftaken = 0;
         $phaseSuperCount = 0;
         $phasesResourceCount = 0;
+        $phaseEnergyCount = 0;
+        $phaseHabitatCount = 0;
 
-        if (($bftaken < $bonusFieldAmount) && (rand(1, 100) <= 15)) {
-            $phaseSuperCount += 1;
-            $bftaken += 1;
+        // Funktionen für die Bonus-Generierung
+        $bonusGenerators = [
+            function () use (&$phaseSuperCount, &$bftaken, $bonusFieldAmount) {
+                if (($bftaken < $bonusFieldAmount) && (rand(1, 100) <= 15)) {
+                    $phaseSuperCount += 1;
+                    $bftaken += 1;
+                }
+            },
+            function () use (&$phasesResourceCount, &$bftaken, $bonusFieldAmount) {
+                if (($bftaken < $bonusFieldAmount) && (rand(1, 100) <= 80)) {
+                    $phasesResourceCount += 1;
+                    $bftaken += 1;
+                }
+            },
+            function () use (&$phaseEnergyCount, &$bftaken, $bonusFieldAmount) {
+                if (($bftaken < $bonusFieldAmount) && (rand(1, 100) <= 30)) {
+                    $phaseEnergyCount += 1;
+                    $bftaken += 1;
+                }
+            },
+            function () use (&$phaseHabitatCount, &$bftaken, $bonusFieldAmount) {
+                if (($bftaken < $bonusFieldAmount) && (rand(1, 100) <= 30)) {
+                    $phaseHabitatCount += 1;
+                    $bftaken += 1;
+                }
+            }
+        ];
+
+        shuffle($bonusGenerators);
+        foreach ($bonusGenerators as $bonusGenerator) {
+            $bonusGenerator();
         }
-        if (($bftaken < $bonusFieldAmount) && (rand(1, 100) <= 80)) {
-            $phasesResourceCount += 1;
-            $bftaken += 1;
-        }
+
         if (($phaseSuperCount == 0) && ($config[self::CONFIG_COLGEN_SIZEW] > 7)) {
             if (($bftaken < $bonusFieldAmount) && (rand(1, 100) <= 10)) {
                 $phasesResourceCount += 1;
             }
         }
 
-
-        // Bonus Phases
+        // Bonus-Phasen
         $bonusPhaseCount = 0;
         $bphase = [];
 
@@ -157,6 +183,16 @@ final class PlanetGenerator implements PlanetGeneratorInterface
 
         for ($i = 0; $i < $phasesResourceCount; $i++) {
             $bphase[$bonusPhaseCount] = $this->createBonusPhase(self::BONUS_ANYRESOURCE);
+            $bonusPhaseCount++;
+        }
+
+        for ($i = 0; $i < $phaseEnergyCount; $i++) {
+            $bphase[$bonusPhaseCount] = $this->createBonusPhase(self::BONUS_AENERGY);
+            $bonusPhaseCount++;
+        }
+
+        for ($i = 0; $i < $phaseHabitatCount; $i++) {
+            $bphase[$bonusPhaseCount] = $this->createBonusPhase(self::BONUS_HABITAT);
             $bonusPhaseCount++;
         }
 
