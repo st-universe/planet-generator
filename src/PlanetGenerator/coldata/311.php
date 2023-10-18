@@ -141,13 +141,3 @@ return [
     $uphase,
     $hasGround, $hasOrbit
 ];
-
-return [
-    $odata,
-    $data,
-    $udata,
-    $ophase,
-    $phase,
-    $uphase,
-    $hasGround, $hasOrbit
-];

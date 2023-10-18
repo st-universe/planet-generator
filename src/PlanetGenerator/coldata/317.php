@@ -209,6 +209,7 @@ $uphase[$uphases][PlanetGenerator::COLGEN_NOADJACENTLIMIT] = 0;
 $uphase[$uphases][PlanetGenerator::COLGEN_FRAGMENTATION] = 8;
 $uphases++;
 
+// Orbit
 
 $ophase[$ophases][PlanetGenerator::COLGEN_MODE] = "upper orbit";
 $ophase[$ophases][PlanetGenerator::COLGEN_DESCRIPTION] = "Lower Orbit";
@@ -221,12 +222,13 @@ $ophase[$ophases][PlanetGenerator::COLGEN_NOADJACENTLIMIT] = 0;
 $ophase[$ophases][PlanetGenerator::COLGEN_FRAGMENTATION] = 2;
 $ophases++;
 
+
 return [
     $odata,
     $data,
     $udata,
     $ophase,
-    [],
-    [],
+    $phase,
+    $uphase,
     $hasGround, $hasOrbit
 ];
