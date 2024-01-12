@@ -20,7 +20,7 @@ $hasOrbit = 1;
 
 $data[PlanetGenerator::COLGEN_BASEFIELD] = 221;
 $odata[PlanetGenerator::COLGEN_BASEFIELD] = 900;
-$udata[PlanetGenerator::COLGEN_BASEFIELD] = 802;
+$udata[PlanetGenerator::COLGEN_BASEFIELD] = 805;
 
 $phases = 0;
 $ophases = 0;
