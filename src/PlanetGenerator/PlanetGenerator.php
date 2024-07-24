@@ -350,7 +350,7 @@ final class PlanetGenerator implements PlanetGeneratorInterface
         $qualityFields = [
             101 => "01", 111 => "01", 112 => "01", 121 => "01", 122 => "02",
             201 => "02", 211 => "02", 212 => "02", 221 => "02", 222 => "02",
-            601 => "01", 611 => "01"
+            611 => "01"
         ];
 
         $solarFields = [
