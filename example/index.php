@@ -47,5 +47,9 @@ if ($planetTypeId === null) {
         buildSurface($planetGenerator, $typeId);
     }
 } else {
-    buildSurface($planetGenerator, $planetTypeId);
+    try {
+        buildSurface($planetGenerator, $planetTypeId);
+    } catch (Exception $e) {
+        echo "{$e->getMessage()}\n";
+    }
 }
