@@ -17,15 +17,15 @@
   },
   "require": {
     "php": "^8.2",
-    "phpstan/phpstan-mockery": "^1.1",
     "jetbrains/phpstorm-stubs": "^2022.3"
   },
   "require-dev": {
-    "phpunit/phpunit": "^10",
+    "phpunit/phpunit": "^11",
     "mockery/mockery": "^1.1",
     "st-universe/assets": "dev-master",
     "mnsami/composer-custom-directory-installer": "^2",
-    "phpstan/phpstan": "^1.9"
+    "phpstan/phpstan": "^2.0",
+    "phpstan/phpstan-mockery": "^2.0"
   },
   "repositories": [
     {
