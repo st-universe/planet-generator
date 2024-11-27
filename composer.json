@@ -3,16 +3,13 @@
   "description": "ST-Universe planet surface generator",
   "license": "MIT",
   "autoload": {
-    "classmap": [
-      "tests/"
-    ],
     "psr-4": {
       "Stu\\PlanetGenerator\\": "src/PlanetGenerator"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Stu\\PlanetGenerator\\": "src/PlanetGenerator"
+      "Stu\\": "tests/"
     }
   },
   "require": {

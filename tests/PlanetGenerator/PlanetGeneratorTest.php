@@ -18,12 +18,6 @@ class PlanetGeneratorTest extends StuTestCase
         $typeIds = $this->subject->getSupportedPlanetTypes();
 
         foreach ($typeIds as $typeId) {
-
-            //skip template
-            if ($typeId === 100) {
-                continue;
-            }
-
             $result = $this->subject->generateColony($typeId, 2);
 
             $this->assertEquals($result->getExpectedFieldCount(), count($result->getFieldArray()), sprintf('error in typeId: %d', $typeId));
