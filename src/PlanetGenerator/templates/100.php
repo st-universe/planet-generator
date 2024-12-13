@@ -4,7 +4,7 @@ use Stu\PlanetGenerator\PlanetGenerator;
 
 $data = $odata = $udata = $phase = [];
 
-$data[PlanetGenerator::COLGEN_DETAILS] = "Klasse X - Test neuer Grafik";
+$data[PlanetGenerator::COLGEN_DETAILS] = "Klasse X - Testoberfläche";
 
 $data[PlanetGenerator::CONFIG_COLGEN_SIZEW] = 10;
 $data[PlanetGenerator::CONFIG_COLGEN_SIZEH] = 6;
