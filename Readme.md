@@ -14,4 +14,5 @@ Beispiel
 - PHP Webserver starten `php -S localhost:1338 -t example`
 
 `http://localhost:1338` im Webbrowser öffnen - hier wird eine Übersicht aller vorhandenen Planeten-Typen dargestellt.
-Mittels des `type` Parameters an der Url kann die Oberfläche eines beliebigen Planetentypen generiert werden.
+Mittels des `type` Parameters an der Url kann die Oberfläche eines beliebigen Planetentypen generiert werden. 
+Bsp.: `http://localhost:1338/?type=201`
